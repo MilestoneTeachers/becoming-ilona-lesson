@@ -37,7 +37,7 @@ window.JOURNEY_WAYPOINTS = [
     citation: "Source: Azrieli Foundation Holocaust Survivor Memoirs Program, Tenuous Threads (2011).",
     streetView: {
       label: "View Stefánia Street today",
-      url: "https://www.google.com/maps/@47.5009,19.0911,15z"
+      url: "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=47.5009,19.0911"
     }
   },
   {
