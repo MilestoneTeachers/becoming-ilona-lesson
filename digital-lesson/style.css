@@ -808,6 +808,50 @@ html, body {
    Print styles -hide everything but the reading column
    ============================================================ */
 
+/* ============================================================
+   Moment figure (embedded animated illustrative beats)
+   ============================================================ */
+
+.moment {
+  margin: 28px 0;
+  padding: 0;
+  border: 1px solid var(--paper-edge);
+  background: var(--paper);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.moment__video,
+.moment__still {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--paper-warm);
+}
+
+.moment__caption {
+  padding: 14px 18px 16px;
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--paper-edge);
+  background: var(--paper-warm);
+}
+
+.moment__caption-label {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gold-deep);
+  margin-right: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moment__video { display: none; }
+  .moment__still { display: block; }
+}
+
 @media print {
   .topbar, .map-column, .page-footer, .page-header__audio,
   .section-actions, .skip-link {
@@ -815,4 +859,7 @@ html, body {
   }
   .split { grid-template-columns: 1fr; }
   body { font-size: 11pt; }
+  /* Print: show still PNG, hide video */
+  .moment__video { display: none; }
+  .moment__still { display: block; }
 }
