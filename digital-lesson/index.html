@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Becoming Ilona, Digital Immersive Lesson on Judy Abrams' Tenuous Threads</title>
+  <meta name="description" content="A Grade 6 digital immersive lesson on Judy Abrams' Holocaust memoir Tenuous Threads. Designed by Brandon Gluck. Pairs the lesson reading with a scrollable Leaflet map of Judy's wartime journey from Budapest to Montreal, plus links to walk those streets today on Google Maps." />
+  <meta name="author" content="Brandon Gluck" />
+  <meta name="robots" content="index,follow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to lesson reading</a>
+
+  <!-- ===== Top bar ===== -->
+  <div class="topbar" role="banner">
+    <div class="topbar__crumb">
+      <strong>Becoming Ilona</strong>
+      <span class="sep">&middot;</span>
+      Grade 6
+      <span class="sep">&middot;</span>
+      by Brandon Gluck
+    </div>
+    <div class="topbar__actions">
+      <button id="play-audio" class="btn" type="button" aria-label="Play lesson narration audio">
+        <span aria-hidden="true">&#9654;</span> Play audio
+      </button>
+      <a href="../Becoming-Ilona-Lesson-Plan.pdf" class="btn btn--primary" aria-label="Download print PDF lesson plan">
+        Download PDF <span aria-hidden="true">&#8595;</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ===== Page header ===== -->
+  <header class="page-header">
+    <h1>Becoming Ilona</h1>
+    <p class="subtitle">A Grade 6 lesson on Judy Abrams' <em>Tenuous Threads</em></p>
+    <p class="byline">Designed by Brandon Gluck</p>
+    <div class="page-header__audio">
+      <audio id="lesson-audio" controls preload="metadata" aria-label="Lesson narration audio">
+        <source src="../audio/lesson-narration.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      <p class="page-header__audio-status" id="audio-status">Audio narration of the full lesson, read by the lesson designer. If audio does not load, the file is still being generated; refresh later or download the print PDF.</p>
+    </div>
+  </header>
+
+  <!-- ===== Main split layout ===== -->
+  <main id="main" class="split">
+
+    <!-- LEFT: Reading column -->
+    <article class="reading-column" aria-label="Lesson reading">
+
+      <!-- Section: Lesson opener -->
+      <section class="lesson-section" id="opener" data-waypoint="">
+        <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Lesson opener</p>
+        <h2>Where this lesson sits</h2>
+        <p>This is a single-period close-reading lesson, sixty minutes, built around four pages of one Holocaust memoir, <em>Tenuous Threads</em> by Judy Abrams (Azrieli Foundation, 2011). It aligns to Ontario Grade 6 Social Studies (2023 revision) expectations <strong>A3.7</strong> and <strong>B3.5</strong>, the Holocaust education requirements added in the 2023 revision.</p>
+        <p>The Azrieli Foundation already publishes a six-lesson <em>Hidden Children</em> program built around this memoir and a four-part Judy Abrams Activity. This lesson is the close-reading companion. When a teacher has one period and wants depth on the identity-transformation moment in the convent-arrival passage of <em>Tenuous Threads</em> (pp. 10-13), this is the lesson.</p>
+
+        <div class="callout callout--feature">
+          <h3>The Big Idea</h3>
+          <p>I built this lesson because the moment Judy Abrams walked through the gate of the Ursuline Mother House at age seven, and was told her name would be Ilona for the year ahead, is the hinge the whole memoir turns on. Her parents could not protect her. The nuns could. The cost of that protection was that she had to put her own name down for a while. This lesson sits with that moment.</p>
+          <p>The work for students is to read what Judy wrote, and to think carefully about what it costs a person to be told her name is no longer her name. The IHRA's <em>Recommendations for Teaching and Learning about the Holocaust</em> (3.2.7) is explicit that we never ask students to imagine they were Judy. We ask them to read what Judy wrote.</p>
+        </div>
+
+        <h3>By the end of this lesson</h3>
+        <ol>
+          <li><strong>I can</strong> describe what happened to seven-year-old Judy at the Ursuline Mother House in Budapest in 1944, using specific details from the passage.</li>
+          <li><strong>I can</strong> explain what changed for Judy when she was given the name Ilona, citing at least two pieces of evidence from the text.</li>
+          <li><strong>I can</strong> connect this passage to the impact of antisemitism on Jewish communities in Canada (Ontario Social Studies A3.7).</li>
+          <li><strong>I can</strong> write a short reflection that uses Judy's own words to think about what a name carries, without having to share more than I want to share.</li>
+        </ol>
+      </section>
+
+      <!-- Section: Minds On -->
+      <section class="lesson-section" id="minds-on" data-waypoint="">
+        <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Minds On &middot; 5 minutes</p>
+        <h2>What does your name carry?</h2>
+        <p>Minds On is a routine, not a warm-up. Its job is to get students thinking with their own lives in the room before new content arrives. If we walk into Judy's words cold, the words land on whatever happens to be in the air that period. If we walk in having already thought for three minutes about our own names, Judy's name change has somewhere to land.</p>
+
+        <div class="callout">
+          <h3>Take 90 seconds on each prompt</h3>
+          <p>You can talk to a partner, write on a sticky note, or just think it through in your head. You do not have to share any of this with the class.</p>
+          <ol>
+            <li><strong>The story of how you got your first name.</strong> Who chose it. Why. What did they want it to mean.</li>
+            <li><strong>One nickname or short form your family uses.</strong> What it means to you. Whether you like it.</li>
+            <li><strong>A name you would not want to be called by, even by accident.</strong> You do not have to share why. You just have to notice that it exists.</li>
+            <li><strong>Find a memory from when you were 7 years old.</strong> Anything. A birthday, a teacher, a thing you were sure of. Hold that memory while we read about Judy at 7.</li>
+          </ol>
+        </div>
+
+        <p>This page is not a simulation. We are not asking students to imagine being Judy. The IHRA's <em>Recommendations</em>, section 3.2.7, is plain on this point: do not run exercises that ask students to imagine they were directly involved in the Holocaust. The Minds On is about the students' own names. The connection lands because they brought their own thinking, not because we asked them to perform someone else's life.</p>
+      </section>
+
+      <!-- Section: Meet Judy (Budapest 1937 waypoint) -->
+      <section class="lesson-section" id="meet-judy" data-waypoint="budapest-1937">
+        <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Meet Judy &middot; Budapest, 1937</p>
+        <h2>Meet Judy Abrams</h2>
+        <p>She was born <strong>Judit Gr&uuml;nfeld</strong> in Budapest, Hungary, on <strong>April 28, 1937</strong>. Her parents were Ren&eacute;e (n&eacute;e Kaba) and L&aacute;szl&oacute; Gr&uuml;nfeld; her father was actively involved in the Hungarian Zionist Organization. She was an only child in a close, middle-class Budapest Jewish household, and the family included her maternal grandmother and her Aunt Marika. Her mother used affectionate Hungarian nicknames for her, the kind of small, ordinary words a child carries through her whole life.</p>
+
+        <p>In <strong>March 1944</strong>, when Judy was six, German forces occupied Hungary. Within weeks the Hungarian government required all Jews aged six and older to wear the yellow star, and by mid-May mass deportations of Hungarian Jews to Auschwitz had begun. With the help of <strong>M&aacute;ria Babar</strong>, a devout Catholic who had previously worked for Judy's family, Judy's parents arranged for her to be hidden by the Ursuline nuns at the <strong>Ursuline Mother House on Stef&aacute;nia Street</strong>, near the V&aacute;rosliget city park. Her father obtained forged identity papers in the name <strong>Ilona Papp</strong>.</p>
+
+        <p>Both of Judy's parents survived. They were deported to the Bergen-Belsen concentration camp as so-called "exchange Jews," held by the SS for possible ransom, and were liberated and reunited with Judy after the war. In <strong>1949</strong> the family emigrated to <strong>Montreal</strong>. As an adult Judy taught French at the United Nations International School in New York City. Her memoir, <em>Tenuous Threads</em>, was published by the Azrieli Foundation in 2011. M&aacute;ria Babar was recognized by Yad Vashem as one of the Righteous Among the Nations in <strong>1994</strong>.</p>
+
+        <p class="section-actions">
+          <em>The map on the right has flown to Budapest, where Judy was born in 1937. As you scroll, the map will follow her path.</em>
+        </p>
+      </section>
+
+      <!-- Section: Before We Read -->
+      <section class="lesson-section" id="before-we-read" data-waypoint="">
+        <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Before we read</p>
+        <h2>Why this lesson is different</h2>
+        <p>Most of what we read in Grade 6 is fiction, or it is nonfiction at a comfortable distance, an article about a place, a passage about a process. This lesson is not that. We are going to read pages from a memoir written by a real person who is alive today. Judy Abrams was seven years old when her parents handed her over to a group of nuns in Budapest so that she would not be killed for being Jewish. The pages we will read describe the day that handover happened.</p>
+
+        <h3>Our class agreement</h3>
+        <div class="callout">
+          <p><strong>Before we read, we agree to the following five things.</strong></p>
+          <ol>
+            <li>We use Judy's name. Not "the girl in the book," not "the Jewish kid." Judy. She was a real child who lived these events, and she is still alive today.</li>
+            <li>We can step out of the discussion if we need to. There is no penalty for needing a moment. Walk to the back of the room, get water, sit quietly, come back when you are ready.</li>
+            <li>We do not make jokes about names, identities, or anyone's faith. Not today, and not next week either.</li>
+            <li>We do not ask "what would I have done?" until later in the lesson. That question is not banned, but it gets asked at the wrong time it pulls our attention away from Judy and onto ourselves.</li>
+            <li>We do not write our reflections during class. Discussion happens immediately. The written reflection is given 24 hours to settle.</li>
+          </ol>
+        </div>
+
+        <p><strong>Who hidden children were.</strong> "Hidden children" is the term historians use for Jewish children whose families gave them over to non-Jewish people or institutions during the Holocaust to keep them alive. Some lived in basements and attics. Others lived in plain sight, with new names and new families. Across Europe, about 93 percent of Jewish children were murdered. The ones who survived survived mostly through hiding.</p>
+
+        <p><strong>Why convents.</strong> Catholic religious institutions in Hungary were among the places where Jewish children were hidden in 1944 and 1945. The nuns and priests who took them in were not following an official policy. They were individuals making choices, at risk of their own lives, because hiding Jews carried the death penalty under the Hungarian Arrow Cross regime.</p>
+      </section>
+
+      <!-- Section: Vocabulary -->
+      <section class="lesson-section" id="vocabulary" data-waypoint="">
+        <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Vocabulary &middot; 6 words</p>
+        <h2>Six words you'll need</h2>
+        <p>These six words show up in the passage we are about to read, or in the conversation around it. We learn them now so that the first reading is uninterrupted.</p>
+
+        <div class="vocab-grid">
+          <div class="vocab-card">
+            <div class="vocab-term">Refuge</div>
+            <div class="vocab-def">A place where you are safe from something that is trying to hurt you. A refuge is not always a fancy place, it can be a basement, a friend's apartment, or a building you didn't grow up in. What makes it a refuge is that you are protected there.</div>
+            <p class="vocab-note"><strong>In this passage:</strong> The Ursuline convent is a refuge for Judy. The nuns inside have agreed to keep her safe.</p>
+          </div>
+
+          <div class="vocab-card">
+            <div class="vocab-term">Identity</div>
+            <div class="vocab-def">Who a person is. Your identity includes your name, your family, the language you speak at home, what you believe, the food you grew up with, and the memories you carry.</div>
+            <p class="vocab-note"><strong>In this passage:</strong> Judy's identity is the entire subject of the reading. We are watching a child be asked to set parts of who she is aside in order to live.</p>
+          </div>
+
+          <div class="vocab-card">
+            <div class="vocab-term">Alias</div>
+            <div class="vocab-def">A different name a person uses, sometimes to protect themselves, sometimes to hide. An alias is not a nickname, a nickname is a friendly version of your real name. An alias is a separate name, used on purpose.</div>
+            <p class="vocab-note"><strong>In this passage:</strong> Judy is given the alias "Ilona Papp" so the people who want to harm her family cannot find her.</p>
+          </div>
+
+          <div class="vocab-card">
+            <div class="vocab-term">Persecution</div>
+            <div class="vocab-def">Being treated badly, harassed, or harmed because of who you are or what you believe. Persecution is targeted, it happens to people not because of anything they did, but because of a group they belong to.</div>
+            <p class="vocab-note"><strong>In this passage:</strong> Judy is hiding because Jewish people in Hungary in 1944 were facing persecution from the Nazi-controlled government and its allies.</p>
+          </div>
+
+          <div class="vocab-card">
+            <div class="vocab-term">Witness</div>
+            <div class="vocab-def">Someone who saw something happen with their own eyes and can describe what they saw. A witness has firsthand knowledge, they were there. The word also carries a sense of responsibility: a witness is someone who can speak to the truth of an event.</div>
+            <p class="vocab-note"><strong>In this passage:</strong> Judy is a witness to her own childhood during the Holocaust.</p>
+          </div>
+
+          <div class="vocab-card">
+            <div class="vocab-term">Testimony</div>
+            <div class="vocab-def">The story a witness tells, in their own words, about what they saw or lived through. Testimony is not the same as a textbook explanation. Testimony is how history holds onto the people inside it.</div>
+            <p class="vocab-note"><strong>In this passage:</strong> <em>Tenuous Threads</em> is Judy Abrams' testimony. We are reading one survivor's first-hand account.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: The Reading I (Ursulines waypoint) -->
+      <section class="lesson-section" id="reading-1" data-waypoint="ursulines-1944">
+        <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> The Reading &middot; Ursuline Mother House, Budapest, 1944</p>
+        <h2>The Reading, part 1 of 2</h2>
+        <p>Distribute pages 10-13 of <em>Tenuous Threads</em> (Azrieli Foundation, 2011). Read the passage aloud, or have students read silently for eight minutes. Free copies for Canadian educators are available at <a href="https://memoirs.azrielifoundation.org/education/memoirs/" target="_blank" rel="noopener">memoirs.azrielifoundation.org/education/memoirs</a>.</p>
+
+        <p>The map on the right has now zoomed to the Ursuline Mother House on Stef&aacute;nia Street, near V&aacute;rosliget city park. Use the link panel beneath the map to walk that street today on Google Maps.</p>
+
+        <div class="excerpt">
+          <p class="excerpt__quote">Nobody would call me 'Judit' or 'Jutka' or 'Juditka' for almost a year.</p>
+          <p class="excerpt__citation">Abrams, 2011, p. 10</p>
+          <p class="excerpt__why-label">Why this line matters</p>
+          <p>Read the sentence the way Judy wrote it. She does not say "I lost my name" or "my name was taken away from me." She says nobody would call her by it. The loss is described from the outside in, through other people's mouths, not from inside her own. That is a craft choice worth pausing on with Grade 6 readers. A child who chooses passive language here is telling us something about how the change felt: it was not something she did, it was something that happened around her. The three pet-name forms Judit, Jutka, Juditka also do quiet work; they show us that this was a loved child with a family who used many small affectionate versions of one name.</p>
+        </div>
+
+        <div class="excerpt">
+          <p class="excerpt__quote">I was to become Ilona Papp, a Catholic child temporarily separated from her parents in the Hungarian countryside.</p>
+          <p class="excerpt__citation">Abrams, 2011, p. 10</p>
+          <p class="excerpt__why-label">Why this line matters</p>
+          <p>The sentence reads almost like a job description. "Was to become" is the language of an assignment, of something a child is told she will be. The cover story is laid out in three calm pieces, a Catholic child, separated from her parents, in the countryside, and each piece is a fact Judy will need to know if she is asked. Notice what the sentence does not say. It does not say what is true: a Jewish child, separated from her parents because her parents are about to be deported, hidden in a city. The whole line is shaped by what has to be hidden.</p>
+        </div>
+
+        <div class="marginalia-grid">
+          <div class="marginalia">
+            <p class="marginalia__label">Notice</p>
+            <p>Judy doesn't write "they took my name away." She writes that nobody would call her by it. That's a different sentence. Losing a thing is one kind of loss. Becoming unrecognizable to the people around you is another.</p>
+          </div>
+          <div class="marginalia">
+            <p class="marginalia__label">Listen</p>
+            <p>Read the three names aloud: Judit, Jutka, Juditka. They get smaller and warmer each time. We hear an entire household in three syllables before we hear what the household is about to lose.</p>
+          </div>
+          <div class="marginalia">
+            <p class="marginalia__label">Wonder</p>
+            <p>The phrase "was to become" sounds the way a teacher's instructions sound. It's the grammar of a task assigned to a child. Who is the speaker hearing those instructions from? The text doesn't tell us. That silence is part of the meaning.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: The Reading II (Pincehely waypoint) -->
+      <section class="lesson-section" id="reading-2" data-waypoint="pincehely-1944">
+        <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> The Reading &middot; arrival, autumn 1944</p>
+        <h2>The Reading, part 2 of 2</h2>
+        <p>The map has now moved to Pincehely, the small town in Tolna County where the Ursulines relocated Judy and other boarding students in autumn 1944 to escape Allied bombing of the capital. The relocation was brief but it removed her from the city at the most dangerous moment of the Hungarian deportations.</p>
+
+        <div class="excerpt">
+          <p class="excerpt__quote">On the day my mother and I arrived at the Ursuline Mother House a strange woman in a black floor-length gown opened the gate.</p>
+          <p class="excerpt__citation">Abrams, 2011, p. 11</p>
+          <p class="excerpt__why-label">Why this line matters</p>
+          <p>Judy is seven, and the sentence shows us how a seven-year-old looks at a frightening moment. She doesn't tell us the woman's face. She doesn't tell us the woman's voice. She tells us the gown: black, floor-length, on a stranger. Children remember the part of a person they can take in without making eye contact. Notice also the careful word "strange." It can mean unfamiliar, and it can mean unsettling, and Judy lets both meanings sit in the line.</p>
+        </div>
+
+        <div class="excerpt">
+          <p class="excerpt__quote">My stomach seemed to constrict around a pebble I hadn't swallowed.</p>
+          <p class="excerpt__citation">Abrams, 2011, p. 11</p>
+          <p class="excerpt__why-label">Why this line matters</p>
+          <p>There is no pebble. That is the whole point of the line. Judy reaches for a body sentence to say a feeling sentence, because the feeling itself is too large for the words a seven-year-old has. This is a teachable definition of figurative language for Grade 6: a real thing borrowed to carry a real feeling that doesn't have its own word yet. Ask students what the pebble is. They will land on fear, dread, the lump in your throat before you cry, and they will be right, because the line is built so that any of those answers fits.</p>
+        </div>
+
+        <div class="marginalia-grid">
+          <div class="marginalia">
+            <p class="marginalia__label">Notice</p>
+            <p>The first thing she remembers is the gown, not the woman. That's how a child stores a frightening grown-up: by the part that is safe to look at. Ask students what they remember about strangers from when they were small. They'll usually remember shoes, hands, a coat. Not faces.</p>
+          </div>
+          <div class="marginalia">
+            <p class="marginalia__label">Try this</p>
+            <p>Read the pebble line a second time and ask the room: where in your body do you feel something you can't say out loud? We're not asking students to share. We're asking them to recognize that Judy is using her body to name a feeling, and that's a move they already know.</p>
+          </div>
+          <div class="marginalia">
+            <p class="marginalia__label">Wonder</p>
+            <p>Judy could have written "I was scared." She didn't. She wrote a sentence that makes the reader do a small piece of figuring out. That's a writer trusting her reader. Why is the pebble line stronger than "I was scared" would have been?</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Liberation -->
+      <section class="lesson-section" id="liberation" data-waypoint="liberation-1945">
+        <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Liberation &middot; Budapest, January 1945</p>
+        <h2>Liberation</h2>
+        <p>Soviet forces liberated Pest on January 18, 1945. Buda was liberated on February 13. Judy was reunited with her mother. Both of her parents survived the war: they were deported as "exchange Jews" to Bergen-Belsen and survived. The family began rebuilding life in postwar Budapest. The map on the right has zoomed back to Budapest, marking the moment a seven-year-old child became Judit again.</p>
+      </section>
+
+      <!-- Section: Judy's Journey (full path overview) -->
+      <section class="lesson-section" id="judys-journey" data-waypoint="all">
+        <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Judy's journey &middot; 1944-1949</p>
+        <h2>Judy's wartime path</h2>
+        <p>Before we look more closely at the words of the passage, we look at the map. Judy's story is also a geography. The places she moved through, in the order she moved through them, are part of what the words on the page mean. The map on the right now shows the full traversed path, every waypoint we have visited so far.</p>
+
+        <p>Show this twice. First time: students watch silently. Second time: pause at each phase and ask <em>"what just changed?"</em> The whole point of the second viewing is to slow the geography down enough that students notice the gap between <em>where Judy was</em> and <em>where Judy was supposed to seem to be</em>. The cover story said the Hungarian countryside; the truth was a Budapest convent for most of the hiding period, with a brief move out to Pincehely. The animation makes that gap visible.</p>
+
+        <ol>
+          <li><strong>Budapest, family home</strong>, pre-1944, with parents, grandmother, and Aunt Marika.</li>
+          <li><strong>Ursuline Mother House, Stef&aacute;nia Street, Budapest</strong>, spring 1944. Becomes "Ilona Papp."</li>
+          <li><strong>Pincehely, Tolna County</strong>, summer-autumn 1944. The convent household relocates to escape bombing of the capital.</li>
+          <li><strong>M&aacute;ria Babar's apartment, Budapest</strong>, autumn 1944 to liberation. Hidden with grandmother and Aunt Marika.</li>
+          <li><strong>Liberation, Budapest</strong>, January-February 1945. Reunited with her mother more than a year after they parted.</li>
+          <li><strong>Montreal, Canada</strong>, 1949. The family arrives, and Judy's Canadian life begins.</li>
+        </ol>
+      </section>
+
+      <!-- Section: Comprehension -->
+      <section class="lesson-section" id="comprehension" data-waypoint="">
+        <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Comprehension &middot; returning to Judy's words</p>
+        <h2>Comprehension questions</h2>
+        <p>These questions take students back into the passage to read more carefully. They are designed to be answered orally in pairs first, then shared with the whole class. No written response is required during class.</p>
+
+        <h3>Literal, close reading at the line level</h3>
+        <ol class="question-list">
+          <li>Judy writes: <em>"I was to become Ilona Papp, a Catholic child temporarily separated from her parents in the Hungarian countryside."</em> Who in the passage gives Judy her new name? What is the new name? Where in the text do we learn the reason for the change?</li>
+          <li>Judy writes: <em>"On the day my mother and I arrived at the Ursuline Mother House a strange woman in a black floor-length gown opened the gate."</em> Where does Judy go on the day described in this passage? Who takes her there? Use evidence from the passage.</li>
+        </ol>
+
+        <h3>Inferential, between the lines</h3>
+        <ol class="question-list">
+          <li>Judy describes her new name as belonging to "a Catholic child temporarily separated from her parents in the Hungarian countryside." Why does this story include "temporarily" and "in the Hungarian countryside"? What is each detail meant to do?</li>
+          <li>Judy writes: <em>"My stomach seemed to constrict around a pebble I hadn't swallowed."</em> What does this image tell us that the words "I was nervous" wouldn't tell us?</li>
+        </ol>
+
+        <h3>Connective, text-to-text and text-to-world</h3>
+        <ol class="question-list">
+          <li>Compare the moment Judy is given her new name with what you read about <em>alias</em> and <em>identity</em> in the vocabulary section. How does the vocabulary you pre-learned change what you notice in the passage?</li>
+          <li>The Azrieli Foundation has published over 30 first-person Holocaust memoirs by Canadian survivors. Why do you think survivors choose to write memoirs in their own words, rather than letting historians summarize their stories?</li>
+        </ol>
+      </section>
+
+      <!-- Section: Sample response (worked example) -->
+      <section class="lesson-section" id="sample-response" data-waypoint="">
+        <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Sample response &middot; what a Level 3 looks like</p>
+        <h2>Sample response</h2>
+        <p>Students who have not been shown what good close reading sounds like cannot reliably produce it. The teacher cues give us look-fors, but a Grade 6 student needs more than look-fors. They need to hear an actual response in a voice close to their own, and they need to know what makes it work.</p>
+
+        <div class="callout">
+          <h3>The prompt we are modelling</h3>
+          <p>Judy writes: <em>"My stomach seemed to constrict around a pebble I hadn't swallowed."</em> What does this image tell us that the words "I was nervous" wouldn't tell us?</p>
+        </div>
+
+        <div class="callout callout--feature">
+          <h3>Sample response (Level 3)</h3>
+          <p>When Judy says her stomach feels like it is squeezing around a pebble she did not swallow, you can feel it in your own stomach a little bit. The feeling has a shape and a place. It is small and hard. The word <em>nervous</em> is just a label, but the pebble image makes you feel what nervous actually does to a person's body. It is also weird because the pebble is not real, she did not swallow anything, but her body is acting like she did. That tells you the fear is so big it is making things up that are not there. A pebble is small, like something a kid would notice, not a grown-up word like <em>anxiety</em> or <em>dread</em>. So the picture fits a seven-year-old.</p>
+        </div>
+
+        <h3>Why this earns Level 3, and what would push it to Level 4</h3>
+        <p>This response does the core work the question is asking for. It names that the image is physical (shape, place, weight) and that "nervous" is abstract. It uses the student's own words rather than copying Judy's. It picks up on the size of the pebble matching the age of the speaker, which is a sharp Grade 6 noticing.</p>
+        <p>A Level 4 response would push further on one specific word: <em>hadn't</em>. The pebble is not real. The student would notice that the figurative language is doing something stranger than just describing fear, it is describing a fear that produces a physical sensation with no physical cause. That insight, in a Grade 6 voice, is the move from solid analysis to genuine close reading.</p>
+      </section>
+
+      <!-- Section: Thought experiment -->
+      <section class="lesson-section" id="thought-experiment" data-waypoint="">
+        <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Thought experiment</p>
+        <h2>What would you have kept hidden?</h2>
+        <p>This is not the question you might be expecting. The question is not "what would you have done in the Holocaust" or "what would you have done if you were Judy." The IHRA <em>Recommendations</em>, section 3.2.7, is explicit on this point: never ask students to imagine themselves directly involved in the Holocaust. Instead, we ask a much smaller and more honest question.</p>
+
+        <div class="callout callout--feature">
+          <h3>The prompt</h3>
+          <p>If you had to pretend to be someone else for a year, to keep yourself or someone you love safe, what would be the hardest part of the new name?</p>
+        </div>
+
+        <h3>Sentence stems for your own thinking</h3>
+        <ol>
+          <li>The hardest part for me would be ___ because ___.</li>
+          <li>I think I could keep ___ secret, but not ___.</li>
+          <li>Judy had to learn ___. I would struggle with ___.</li>
+          <li>What I notice about Judy is that she ___.</li>
+        </ol>
+
+        <h3>Sentence stems for partner conversation</h3>
+        <ol>
+          <li>When you said ___, I thought of ___.</li>
+          <li>I disagree gently. I think ___.</li>
+          <li>What did you mean by ___?</li>
+        </ol>
+      </section>
+
+      <!-- Section: Exit ticket -->
+      <section class="lesson-section" id="exit-ticket" data-waypoint="">
+        <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Exit ticket &middot; the last 3 minutes</p>
+        <h2>Exit ticket</h2>
+        <p>The Reflection (next section) is for tomorrow. Six to twelve sentences, written at home, with a full evening of distance from the reading. The Exit Ticket is not that. The Exit Ticket happens right now, in the last three minutes of class, on a scrap of paper, before the bell. It is one sentence. It is informal. It is not graded.</p>
+
+        <div class="callout callout--feature">
+          <h3>Today's exit ticket</h3>
+          <p><strong>Write one sentence about what you noticed in Judy's words today.</strong></p>
+          <p>You can hand this in with or without your name. Drop it in the basket on your way out.</p>
+        </div>
+
+        <p>Working memory is full at the end of a sixty-minute lesson on this material. Asking for a paragraph at minute fifty-eight produces a thin paragraph and a tired class. Asking for one sentence produces a sentence the student actually meant.</p>
+      </section>
+
+      <!-- Section: Reflection -->
+      <section class="lesson-section" id="reflection" data-waypoint="montreal-1949">
+        <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Reflection &middot; for tomorrow</p>
+        <h2>Reflection. For tomorrow.</h2>
+        <p>Written reflection on this passage happens 24 hours later, not in class today. The Azrieli Foundation's guidance on trauma-informed teaching recommends a cooling-off period between sensitive memoir content and a deeper written response, so that students sit with the reading overnight rather than rushing a paragraph while their feelings are still loud.</p>
+
+        <p>The map on the right has now flown to Montreal, where Judy and her family settled in 1949. The Mile End and Plateau neighbourhoods were where many Hungarian Jewish refugees rebuilt their lives. Use the link panel beneath the map to walk those streets today.</p>
+
+        <p><strong>Choose ONE of the following three prompts. Tomorrow, write a 6-12 sentence response.</strong></p>
+
+        <div class="callout">
+          <h3>Prompt A: Close reading</h3>
+          <p>Choose one moment from the passage that you cannot stop thinking about. Describe the moment in your own words. Then explain why this is the moment your mind keeps returning to. Use at least one quote from the text.</p>
+        </div>
+
+        <div class="callout">
+          <h3>Prompt B: Connection to memory</h3>
+          <p>Judy chose to write <em>Tenuous Threads</em> almost 70 years after the events. Why might a survivor wait that long? What would be hard about writing it sooner? What would be hard about writing it 70 years later?</p>
+        </div>
+
+        <div class="callout">
+          <h3>Prompt C: The Foundation's work</h3>
+          <p>The Azrieli Foundation publishes Canadian Holocaust survivor memoirs and provides them free to schools. Why might it matter that the memoirs are by Canadians specifically? Why might a Canadian Grade 6 student in 2026 read the words of a Hungarian-born survivor whose memoir was published in 2011?</p>
+        </div>
+      </section>
+
+      <!-- Section: Sources -->
+      <section class="lesson-section" id="sources" data-waypoint="memoir-2011">
+        <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Sources &middot; published 2011</p>
+        <h2>Sources and further reading</h2>
+        <p>This lesson rests on a small number of carefully cited sources. The map on the right has zoomed out to show the full arc of the testimony itself, from Budapest in 1937 to the publication of <em>Tenuous Threads</em> in 2011 by the Azrieli Foundation Holocaust Survivor Memoirs Program.</p>
+
+        <h3>Primary source</h3>
+        <p>Abrams, J. (2011). <em>Tenuous Threads</em> (paired in one volume with Eva Felsenburg Marx, <em>One of the Lucky Ones</em>). Toronto: The Azrieli Foundation, Holocaust Survivor Memoirs Program, in association with Second Story Press. ISBN 978-1-897470-28-2.</p>
+
+        <h3>Curriculum documents</h3>
+        <p>Ontario Ministry of Education. (2023). <em>The Ontario Curriculum, Grades 1-8: Social Studies, History, and Geography</em> (revised edition). Specific expectations cited in this lesson: A3.7 and B3.5 (added in the 2023 revision under the Grade 6 Holocaust education curriculum requirement).</p>
+
+        <h3>Holocaust education frameworks</h3>
+        <p>International Holocaust Remembrance Alliance, in partnership with UNESCO. (2019). <em>Recommendations for Teaching and Learning about the Holocaust</em>. ISBN 978-3-00-064374-3. The pedagogical decisions in this lesson, one individual story rather than statistics; no graphic imagery; no simulation, follow IHRA Recommendations 3.2.3, 3.2.4, 3.2.7, 3.4.1, and 3.4.2.</p>
+
+        <p>United States Holocaust Memorial Museum. <em>Guidelines for Teaching About the Holocaust</em>. Grade 6 is the entry grade USHMM endorses for explicit Holocaust instruction; this lesson honours USHMM guidelines 9 (translate statistics into people) and 10 (no simulations).</p>
+
+        <p>Yad Vashem International School for Holocaust Studies. <em>Pedagogical Principles for Teaching the Holocaust at the Elementary Level</em>. The lesson's biographical framing of Judy across three movements, before hiding, during hiding, and as the postwar Canadian author of this memoir, is drawn from Yad Vashem's elementary-level guidance.</p>
+
+        <h3>About the Azrieli Foundation</h3>
+        <p>The Azrieli Foundation Holocaust Survivor Memoirs Program publishes the unpublished memoirs of Holocaust survivors who came to Canada and distributes them at no cost to Canadian educators, school libraries, and post-secondary instructors. Free print copies, e-books, and PDFs are available at <a href="https://memoirs.azrielifoundation.org/education/memoirs/" target="_blank" rel="noopener">memoirs.azrielifoundation.org/education/memoirs</a>.</p>
+      </section>
+
+      <!-- Section: Designer note -->
+      <section class="lesson-section" id="designer" data-waypoint="">
+        <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> About the designer</p>
+        <h2>Why this lesson exists</h2>
+        <p>Brandon Gluck has taught in Ontario classrooms for over a decade, with expertise in Universal Design for Learning and differentiated instruction. He is a technology consultant and advisor to Ontario school boards, helping districts integrate digital tools with sound pedagogy. A grandchild of a Holocaust survivor, Brandon is a steadfast advocate for the Jewish community and for Israel, and the work of carrying survivor memory forward is both professional and personal for him.</p>
+
+        <p>Beginning this year, middle-grade students in Ontario will encounter the Holocaust as part of their required Grade 6 Social Studies work. The Azrieli Foundation has built a remarkable library of survivor voices in their own words. The work I want to do is bridge the two, to design lessons that bring the Foundation's published memoirs into Ontario classrooms with the seriousness they deserve, the pedagogical care the students deserve, and the moral imagination the survivors' words have already given us.</p>
+      </section>
+
+    </article>
+
+    <!-- RIGHT: Sticky map column -->
+    <aside class="map-column" aria-label="Map of Judy's wartime journey">
+      <div class="map-sticky">
+
+        <div class="map-frame">
+          <div class="map-status" id="map-status" aria-live="polite">
+            <span class="map-status__step" id="map-status-step">Stop 0 of 6</span>
+            <span id="map-status-title">Hungary to Canada, 1937 to 2011</span>
+          </div>
+          <div id="map" role="application" aria-label="Interactive map of Judy Abrams' wartime journey, advances as the lesson scrolls" tabindex="0"></div>
+        </div>
+
+        <div class="streetview-panel" id="streetview-panel" aria-label="Street View links for the current waypoint">
+          <p class="streetview-panel__title">Walk these streets today</p>
+          <p class="streetview-panel__intro">Three places from Judy's path are still walkable on Google Maps. Each link opens Street View in a new tab.</p>
+
+          <a class="streetview-link" href="https://www.google.com/maps/@47.5009,19.0911,3a,75y,90h,90t/data=!3m6!1e1" target="_blank" rel="noopener noreferrer" aria-label="Walk Stefania Street, Budapest, today on Google Street View, opens in new tab">
+            <strong>Stef&aacute;nia Street, Budapest</strong>
+            <span>The neighbourhood of the Ursuline Mother House</span>
+          </a>
+
+          <a class="streetview-link" href="https://www.google.com/maps/@46.7333,18.4500,3a,75y,90h,90t/data=!3m6!1e1" target="_blank" rel="noopener noreferrer" aria-label="Walk Pincehely village, Hungary, today on Google Street View, opens in new tab">
+            <strong>Pincehely village, Tolna County</strong>
+            <span>The rural Hungarian village where the convent relocated</span>
+          </a>
+
+          <a class="streetview-link" href="https://www.google.com/maps/@45.5219,-73.5957,3a,75y,90h,90t/data=!3m6!1e1" target="_blank" rel="noopener noreferrer" aria-label="Walk Mile End, Montreal, today on Google Street View, opens in new tab">
+            <strong>Mile End, Montreal</strong>
+            <span>Where many Hungarian Jewish refugees resettled in 1949</span>
+          </a>
+        </div>
+
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="page-footer">
+    <p>This digital lesson is one of two products. The print PDF is the primary editorial artifact. <a href="../Becoming-Ilona-Lesson-Plan.pdf">Download the print PDF</a>.</p>
+    <p>Designed by Brandon Gluck. Map tiles via <a href="https://carto.com/attributions" target="_blank" rel="noopener">CartoDB Positron</a> and <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>. Map library: <a href="https://leafletjs.com/" target="_blank" rel="noopener">Leaflet 1.9.4</a>. All historical claims are sourced from Judy Abrams' <em>Tenuous Threads</em> (Azrieli Foundation, 2011), the USHMM Holocaust Encyclopedia, and Yad Vashem.</p>
+  </footer>
+
+  <!-- ===== Scripts ===== -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="../journey-map/waypoints.js"></script>
+  <script src="./controller.js"></script>
+
+</body>
+</html>
