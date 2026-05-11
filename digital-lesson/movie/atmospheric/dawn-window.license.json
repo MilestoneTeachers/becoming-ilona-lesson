@@ -1,0 +1,11 @@
+{
+  "source": "OpenRouter google/veo-3.1-fast",
+  "model": "google/veo-3.1-fast",
+  "license": "Generated content — Google Veo terms apply; commercial + educational use permitted",
+  "attribution_string": "Atmospheric footage generated via Google Veo 3.1 Fast",
+  "url": "https://openrouter.ai/google/veo-3.1-fast",
+  "prompt": "Soft pale dawn light filtering through a tall narrow window casting long rectangular shadows on a wooden floor, dust motes floating slowly, warm color grade transitioning from blue to amber, no people, no furniture, no text, slow tracking shot, cinematic 35mm film grain.",
+  "generated_at": "2026-05-11T13:12:43.901Z",
+  "cost_usd": 0.9504,
+  "note": "Transition filler; strictly environmental, no human figures, no period markers."
+}

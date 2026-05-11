@@ -1,0 +1,11 @@
+{
+  "source": "OpenRouter google/veo-3.1-fast",
+  "model": "google/veo-3.1-fast",
+  "license": "Generated content — Google Veo terms apply; commercial + educational use permitted",
+  "attribution_string": "Atmospheric footage generated via Google Veo 3.1 Fast",
+  "url": "https://openrouter.ai/google/veo-3.1-fast",
+  "prompt": "Rain drops falling slowly on weathered grey stone steps at dusk, single street lamp glow reflected on wet surface, narrow depth of field, deep blue and warm tungsten color palette, no people, no signs, no vehicles, cinematic 35mm film grain, slow push-in.",
+  "generated_at": "2026-05-11T13:11:03.632Z",
+  "cost_usd": 0.9504,
+  "note": "Transition filler; strictly environmental, no human figures, no period markers."
+}

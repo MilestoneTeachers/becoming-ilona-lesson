@@ -1,5 +1,5 @@
 {
-  "totalDurationSeconds": 320,
+  "totalDurationSeconds": 330,
   "narration": {
     "src": "./narration/festival-cut.mp3",
     "captions": "./narration/festival-cut.vtt"
@@ -33,10 +33,11 @@
       },
       "beats": [
         { "type": "title", "asset": "./chapter-cards/ch2-before.mp4", "startSeconds": 30, "endSeconds": 42 },
-        { "type": "ken-burns-photo", "asset": "../../photos/judy/budapest-park-baby-carriages-1938-fortepan.jpg", "startSeconds": 42, "endSeconds": 60, "panFrom": { "x": 0.3, "y": 0.5, "zoom": 1.0 }, "panTo": { "x": 0.7, "y": 0.5, "zoom": 1.35 } },
-        { "type": "veo-atmospheric", "asset": "./atmospheric/alternates/candle-windowsill-alt.mp4", "startSeconds": 60, "endSeconds": 67, "loop": true },
-        { "type": "remotion-moment", "asset": "./moments-new/march-1944-empty-room.mp4", "startSeconds": 67, "endSeconds": 90 },
-        { "type": "veo-atmospheric", "asset": "./atmospheric/candle-windowsill.mp4", "startSeconds": 90, "endSeconds": 110, "loop": true }
+        { "type": "ken-burns-photo", "asset": "../../photos/judy/budapest-park-baby-carriages-1938-fortepan.jpg", "startSeconds": 42, "endSeconds": 58, "panFrom": { "x": 0.3, "y": 0.5, "zoom": 1.0 }, "panTo": { "x": 0.7, "y": 0.5, "zoom": 1.35 } },
+        { "type": "veo-atmospheric", "asset": "./atmospheric/rain-on-stone.mp4", "startSeconds": 58, "endSeconds": 66, "loop": true },
+        { "type": "veo-atmospheric", "asset": "./atmospheric/alternates/candle-windowsill-alt.mp4", "startSeconds": 66, "endSeconds": 72, "loop": true },
+        { "type": "remotion-moment", "asset": "./moments-new/march-1944-empty-room.mp4", "startSeconds": 72, "endSeconds": 92 },
+        { "type": "veo-atmospheric", "asset": "./atmospheric/candle-windowsill.mp4", "startSeconds": 92, "endSeconds": 110, "loop": true }
       ]
     },
     {
@@ -63,7 +64,7 @@
       "id": "ch4-after",
       "title": "CHAPTER 4 — AFTER",
       "startSeconds": 220,
-      "endSeconds": 320,
+      "endSeconds": 330,
       "musicCue": null,
       "beats": [
         { "type": "title", "asset": "./chapter-cards/ch4-after.mp4", "startSeconds": 220, "endSeconds": 232 },
@@ -71,8 +72,9 @@
         { "type": "ken-burns-photo", "asset": "../../photos/judy/halifax-pier21-immigrant-woman-baby-1948.jpg", "startSeconds": 250, "endSeconds": 268, "panFrom": { "x": 0.5, "y": 0.4, "zoom": 1.0 }, "panTo": { "x": 0.5, "y": 0.55, "zoom": 1.3 } },
         { "type": "then-now-slider", "leftSrc": "../then-now/assets/halifax-pier21-1948.jpg", "rightSrc": "../then-now/assets/mile-end-2018.jpg", "startSeconds": 268, "endSeconds": 283 },
         { "type": "veo-atmospheric", "asset": "./atmospheric/alternates/wheat-golden-hour-alt.mp4", "startSeconds": 283, "endSeconds": 290, "loop": true },
-        { "type": "remotion-moment", "asset": "../assets/moments/two-suitcases.mp4", "startSeconds": 290, "endSeconds": 300 },
-        { "type": "end-credits", "asset": "./end-credits.mp4", "startSeconds": 300, "endSeconds": 320 }
+        { "type": "veo-atmospheric", "asset": "./atmospheric/dawn-window.mp4", "startSeconds": 290, "endSeconds": 298, "loop": true },
+        { "type": "remotion-moment", "asset": "../assets/moments/two-suitcases.mp4", "startSeconds": 298, "endSeconds": 310 },
+        { "type": "end-credits", "asset": "./end-credits.mp4", "startSeconds": 310, "endSeconds": 330 }
       ]
     }
   ]
