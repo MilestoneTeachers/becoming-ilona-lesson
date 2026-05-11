@@ -848,3 +848,34 @@
     init();
   }
 })();
+
+// =============================================================================
+// Festival Cut launcher — dynamically import the player on first click.
+// =============================================================================
+(function setupMovieModeCTA() {
+  function attach() {
+    const btn = document.getElementById("movie-mode-cta");
+    if (!btn) return;
+    btn.addEventListener("click", async () => {
+      btn.disabled = true;
+      const originalHTML = btn.innerHTML;
+      btn.textContent = "Loading film…";
+      try {
+        const { MovieMode } = await import("./movie/movie-mode.js");
+        await MovieMode.open({ timelineSrc: "./movie/timeline.json" });
+      } catch (e) {
+        console.error("[festival-cut] failed to open:", e);
+        btn.textContent = "Couldn't open film — see console";
+        setTimeout(() => { btn.innerHTML = originalHTML; btn.disabled = false; }, 4000);
+        return;
+      }
+      btn.disabled = false;
+      btn.innerHTML = originalHTML;
+    });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", attach);
+  } else {
+    attach();
+  }
+})();

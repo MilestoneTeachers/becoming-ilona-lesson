@@ -1,0 +1,283 @@
+/* ============================================================
+   Becoming Ilona — Festival Cut stage chrome
+   Activated when MovieMode.open() runs.
+   ============================================================ */
+
+.movie-mode-stage {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  font-family: "Source Sans 3", "Source Sans Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #FFFFFF;
+}
+
+.movie-mode-stage[hidden] { display: none; }
+
+.movie-mode-stage__letterbox-top,
+.movie-mode-stage__letterbox-bottom {
+  flex: 0 0 5%;
+  background: #000;
+}
+
+.movie-mode-stage__viewport {
+  position: relative;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.movie-mode-stage__beat-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.movie-mode-stage__beat-layer > * {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.movie-mode-stage__beat-layer video,
+.movie-mode-stage__beat-layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 1s ease-in-out;
+}
+
+.movie-mode-stage__beat-layer .ken-burns {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center;
+}
+
+.movie-mode-stage__captions {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 60px;
+  text-align: center;
+  pointer-events: none;
+}
+.movie-mode-stage__captions[hidden] { display: none; }
+
+.movie-mode-stage__caption-text {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.78);
+  color: #FFFFFF;
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  padding: 10px 22px;
+  border-radius: 4px;
+  max-width: 80vw;
+  text-wrap: balance;
+}
+
+.movie-mode-stage__pause-panel {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.84);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5vh 8vw;
+  z-index: 5;
+}
+.movie-mode-stage__pause-panel[hidden] { display: none; }
+
+.movie-mode-stage__pause-eyebrow {
+  font-size: clamp(14px, 1.4vw, 18px);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #E8B341;
+  margin: 0 0 24px;
+}
+
+.movie-mode-stage__pause-prompt {
+  font-family: "Outfit", "Source Sans 3", sans-serif;
+  font-size: clamp(28px, 4vw, 56px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 20px;
+  max-width: 22ch;
+  text-wrap: balance;
+}
+
+.movie-mode-stage__pause-framing {
+  font-size: clamp(16px, 1.6vw, 22px);
+  font-style: italic;
+  color: #E8B341;
+  margin: 0 0 36px;
+  max-width: 40ch;
+  text-wrap: balance;
+}
+
+.movie-mode-stage__pause-continue {
+  background: #E8B341;
+  color: #0F172A;
+  border: none;
+  border-radius: 4px;
+  padding: 14px 36px;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.movie-mode-stage__pause-continue:hover,
+.movie-mode-stage__pause-continue:focus {
+  background: #B58A2B;
+  outline: 3px solid #FFF;
+  outline-offset: 2px;
+}
+
+.movie-mode-stage__controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 24px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: opacity 280ms ease;
+  z-index: 10;
+}
+.movie-mode-stage__controls[data-hidden="true"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.movie-mode-stage__btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #FFFFFF;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+.movie-mode-stage__btn:hover,
+.movie-mode-stage__btn:focus {
+  background: rgba(232, 179, 65, 0.2);
+  border-color: #E8B341;
+  outline: none;
+}
+
+.movie-mode-stage__timeline {
+  flex: 1 1 auto;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+}
+.movie-mode-stage__timeline-fill {
+  height: 100%;
+  background: #E8B341;
+  border-radius: 3px;
+  width: 0;
+}
+.movie-mode-stage__chapter-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.8);
+  min-width: 80px;
+  text-transform: uppercase;
+}
+
+.movie-mode-stage__loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  z-index: 20;
+  color: #E8B341;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+}
+.movie-mode-stage__loading[hidden] { display: none; }
+
+/* CTA button on the digital lesson reading column */
+.movie-mode-cta {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  margin: 32px auto;
+  padding: 24px 28px;
+  background: #0F172A;
+  color: #FFFFFF;
+  border: 2px solid #E8B341;
+  border-radius: 6px;
+  font-family: "Outfit", "Source Sans 3", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  text-align: center;
+  transition: background 200ms, transform 200ms;
+}
+.movie-mode-cta:hover,
+.movie-mode-cta:focus {
+  background: #1a2440;
+  transform: translateY(-2px);
+  outline: 3px solid #E8B341;
+  outline-offset: 4px;
+}
+
+.movie-mode-cta__icon {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background: #E8B341;
+  border-radius: 50%;
+  margin-right: 12px;
+  vertical-align: -2px;
+  position: relative;
+}
+.movie-mode-cta__icon::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 5px;
+  border-left: 9px solid #0F172A;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+.movie-mode-cta__subtitle {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: italic;
+  color: #E8B341;
+  letter-spacing: 0;
+  margin-top: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .movie-mode-stage__beat-layer video,
+  .movie-mode-stage__beat-layer img { transition: none; }
+  .movie-mode-cta:hover, .movie-mode-cta:focus { transform: none; }
+}
