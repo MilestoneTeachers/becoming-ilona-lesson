@@ -862,4 +862,456 @@ html, body {
   /* Print: show still PNG, hide video */
   .moment__video { display: none; }
   .moment__still { display: block; }
+  .then-now-block__intro { display: none !important; }
+  .slide-nav, .intro-overlay { display: none !important; }
+}
+
+/* ============================================================
+   Mode toggle (Read | Present) in the top bar
+   ============================================================ */
+
+.mode-toggle {
+  display: inline-flex;
+  border: 1px solid var(--ink-rule);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-right: 4px;
+}
+
+.mode-toggle__btn {
+  background: var(--paper);
+  color: var(--ink);
+  border: none;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+.mode-toggle__btn + .mode-toggle__btn {
+  border-left: 1px solid var(--ink-rule);
+}
+.mode-toggle__btn:hover,
+.mode-toggle__btn:focus {
+  background: var(--gold-soft);
+  outline: none;
+}
+.mode-toggle__btn.is-active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ============================================================
+   Audio pulse banner
+   ============================================================ */
+
+.audio-pulse {
+  margin: 0 0 12px;
+  height: 0;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--paper-warm);
+  transition: height 320ms ease;
+}
+.audio-pulse[data-state="playing"],
+.audio-pulse[data-state="paused"] {
+  height: 60px;
+  border: 1px solid var(--ink-rule);
+}
+.audio-pulse__video,
+.audio-pulse__still {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.audio-pulse[data-state="playing"] .audio-pulse__video {
+  display: block;
+}
+.audio-pulse[data-state="playing"] .audio-pulse__still {
+  display: none;
+}
+.audio-pulse[data-state="paused"] .audio-pulse__video {
+  display: none;
+}
+.audio-pulse[data-state="paused"] .audio-pulse__still {
+  display: block;
+}
+.audio-pulse[data-state="idle"] .audio-pulse__video,
+.audio-pulse[data-state="idle"] .audio-pulse__still {
+  display: none;
+}
+
+/* ============================================================
+   Then-and-Now blocks (inline, inside the reading column)
+   ============================================================ */
+
+.then-now-block {
+  margin: 36px 0 16px;
+  border: 1px solid var(--paper-edge);
+  border-radius: 4px;
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.then-now-block__intro {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--paper-warm);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 360ms ease, opacity 360ms ease;
+}
+.then-now-block.is-intro-playing .then-now-block__intro {
+  max-height: 600px;
+  opacity: 1;
+}
+.then-now-block.is-intro-played .then-now-block__intro {
+  max-height: 0;
+  opacity: 0;
+}
+
+.then-now-block__video,
+.then-now-block__still {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.then-now-block__still { display: none; }
+
+.then-now-block__slider {
+  padding: 18px 20px 22px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 480ms ease, transform 480ms ease;
+}
+.then-now-block.is-revealed .then-now-block__slider {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.then-now-block__title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+
+.then-now-block__caption {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
+
+.then-now-frame {
+  border: 1px solid var(--ink-rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--paper);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+img-comparison-slider {
+  --divider-color: var(--gold);
+  --divider-width: 3px;
+  --default-handle-color: var(--gold);
+  --default-handle-opacity: 1;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+img-comparison-slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+img-comparison-slider:focus-within {
+  outline: 3px solid var(--gold-deep);
+  outline-offset: 2px;
+}
+
+.then-now-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  margin: 12px 2px 14px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--gold-deep);
+}
+
+.then-now-link {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 8px 14px;
+  background: var(--paper-warm);
+  color: var(--ink);
+  border: 1px solid var(--ink-rule);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background var(--transition), border-color var(--transition);
+}
+.then-now-link:hover,
+.then-now-link:focus {
+  background: var(--gold-soft);
+  border-color: var(--gold);
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .then-now-block__intro {
+    max-height: 0 !important;
+    opacity: 0 !important;
+  }
+  .then-now-block__slider {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ============================================================
+   Slide mode: present a single section at a time
+   ============================================================ */
+
+body.slide-mode {
+  background: var(--paper);
+  overflow: hidden;
+  height: 100vh;
+}
+body.slide-mode .topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+}
+body.slide-mode .page-header,
+body.slide-mode .page-footer,
+body.slide-mode .map-column {
+  display: none !important;
+}
+body.slide-mode main.split {
+  display: block;
+  padding: 0;
+  max-width: none;
+  height: 100vh;
+  overflow: hidden;
+}
+body.slide-mode .reading-column {
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body.slide-mode .lesson-section {
+  display: none;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: calc(var(--header-h) + 24px) 32px 96px;
+  border-top: none !important;
+  height: 100vh;
+  overflow-y: auto;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+body.slide-mode .lesson-section.is-current {
+  display: block;
+  opacity: 1;
+}
+body.slide-mode .lesson-section.is-current.is-fading {
+  opacity: 0;
+}
+body.slide-mode .lesson-section.is-active::before {
+  display: none;
+}
+body.slide-mode .lesson-section h2 {
+  font-size: 36px;
+}
+body.slide-mode .lesson-section h3 {
+  font-size: 22px;
+}
+body.slide-mode .lesson-section p {
+  font-size: 18px;
+  line-height: 1.65;
+}
+body.slide-mode .audio-pulse,
+body.slide-mode .skip-link {
+  display: none !important;
+}
+
+.slide-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 250;
+  background: var(--paper);
+  border-top: 1px solid var(--ink-rule);
+  padding: 12px 24px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+body.slide-mode .slide-nav {
+  display: flex;
+}
+
+.slide-nav__btn,
+.slide-nav__exit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--ink-rule);
+  padding: 10px 18px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background var(--transition), border-color var(--transition);
+}
+.slide-nav__btn:hover,
+.slide-nav__btn:focus,
+.slide-nav__exit:hover,
+.slide-nav__exit:focus {
+  background: var(--gold-soft);
+  border-color: var(--gold);
+  outline: none;
+}
+.slide-nav__btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.slide-nav__progress {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.slide-nav__exit {
+  margin-left: 8px;
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.slide-nav__exit:hover,
+.slide-nav__exit:focus {
+  background: var(--gold-deep);
+  border-color: var(--gold-deep);
+  color: var(--paper);
+}
+
+/* ============================================================
+   Intro overlay (full-screen card before a slide reveal,
+   also used for the now-presenting intro when entering
+   present mode for the first time)
+   ============================================================ */
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--ink);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 400;
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+.intro-overlay.is-visible {
+  display: flex;
+  opacity: 1;
+}
+.intro-overlay__video,
+.intro-overlay__still {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.intro-overlay__still {
+  display: none;
+}
+.intro-overlay__skip {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--paper);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background var(--transition);
+}
+.intro-overlay__skip:hover,
+.intro-overlay__skip:focus {
+  background: rgba(255, 255, 255, 0.22);
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-overlay__video { display: none; }
+  .intro-overlay__still { display: block; }
+  .intro-overlay { transition: none; }
+}
+
+/* ============================================================
+   Mobile slide-mode adjustments
+   ============================================================ */
+
+@media (max-width: 800px) {
+  body.slide-mode .lesson-section {
+    padding: calc(var(--header-h) + 16px) 16px 96px;
+  }
+  body.slide-mode .lesson-section h2 {
+    font-size: 26px;
+  }
+  body.slide-mode .lesson-section p {
+    font-size: 16px;
+  }
+  .slide-nav {
+    padding: 10px 12px;
+    gap: 6px;
+  }
+  .slide-nav__btn,
+  .slide-nav__exit {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  .slide-nav__progress {
+    font-size: 11px;
+  }
+  .mode-toggle__btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
 }

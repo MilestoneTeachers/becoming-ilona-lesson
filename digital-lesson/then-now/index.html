@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Then and Now, Judy Abrams' Wartime Path</title>
+  <meta name="description" content="Three places from Judy Abrams' path through Hungary and into Canada. Drag the slider to see the same place across two different decades." />
+  <meta name="author" content="Brandon Gluck" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css" />
+
+  <style>
+    /* ========================================================
+       Then and Now slider page
+       Builds on the digital-lesson style.css for typography +
+       brand colors. Each slider sits inside a .then-now-section
+       block; its caption sits above it and its attribution +
+       license sits below it.
+       ======================================================== */
+
+    main.then-now-page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    .then-now-page h1 {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin: 0 0 8px;
+    }
+
+    .then-now-page .lede {
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      margin: 0 0 36px;
+      max-width: 720px;
+    }
+
+    .then-now-section {
+      margin: 56px 0 0;
+      padding-top: 28px;
+      border-top: 1px solid var(--ink-rule);
+    }
+    .then-now-section:first-of-type {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 36px;
+    }
+
+    .then-now-section h2 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      margin: 0 0 6px;
+      color: var(--ink);
+    }
+
+    .then-now-caption {
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      margin: 0 0 18px;
+      max-width: 760px;
+    }
+    .then-now-caption em { color: var(--ink); font-style: italic; }
+
+    .then-now-frame {
+      border: 1px solid var(--ink-rule);
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    img-comparison-slider {
+      --divider-color: var(--gold, #E8B341);
+      --divider-width: 3px;
+      --default-handle-color: var(--gold, #E8B341);
+      --default-handle-opacity: 1;
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+    }
+    img-comparison-slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    img-comparison-slider:focus-within {
+      outline: 3px solid var(--gold-deep, #B58A2B);
+      outline-offset: 4px;
+    }
+
+    .then-now-labels {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 24px;
+      margin: 12px 2px 4px;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold-deep, #B58A2B);
+    }
+
+    .then-now-attribution {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--ink-muted);
+      margin: 8px 2px 0;
+    }
+    .then-now-attribution a {
+      color: var(--ink-muted);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* Mobile: tighten spacing, show stacked labels */
+    @media (max-width: 640px) {
+      main.then-now-page { padding: 16px 14px 56px; }
+      .then-now-page h1 { font-size: 28px; }
+      .then-now-page .lede { font-size: 16px; margin-bottom: 24px; }
+      .then-now-section { margin-top: 40px; padding-top: 22px; }
+      .then-now-section h2 { font-size: 20px; }
+      .then-now-caption { font-size: 15px; margin-bottom: 14px; }
+      .then-now-labels { font-size: 11px; }
+      .then-now-attribution { font-size: 11.5px; }
+    }
+
+    /* Footer back-to-lesson link */
+    .then-now-back {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--ink-rule);
+      font-size: 15px;
+    }
+    .then-now-back a {
+      color: var(--gold-deep, #B58A2B);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .then-now-back a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to sliders</a>
+
+  <main id="main" class="then-now-page" role="main">
+
+    <h1>Then and Now</h1>
+    <p class="lede">Three places along Judy's path. Drag the gold divider on each picture to see the same place in two different decades. Each pair pairs a wartime photograph with one taken seventy or eighty years later.</p>
+
+    <!-- ============================================================
+         1. Stefania Street, Budapest
+         then: 1943 Fortepan photograph of Stefania ut 107
+         now : 2018 Globetrotter19 photograph of Stefania ut trolleybus
+         ============================================================ -->
+    <section class="then-now-section" aria-labelledby="title-stefania">
+      <h2 id="title-stefania">Stefania Street, Budapest</h2>
+      <p class="then-now-caption">The street where Judy lived as a young child. The 1943 photograph shows Stefania ut number 107, the wartime Swiss Embassy. Carl Lutz issued protective letters from this building that saved tens of thousands of Hungarian Jews the next year. Drag the slider to see the same street in 2018.</p>
+
+      <div class="then-now-frame">
+        <img-comparison-slider tabindex="0" aria-label="Stefania Street comparison slider, drag to compare 1943 and 2018">
+          <img slot="first"
+               src="./assets/stefania-1943.jpg"
+               alt="Stefania ut 107, Budapest, 1943. A leafless tree-lined street with the Swiss Embassy building behind a wrought-iron fence." />
+          <img slot="second"
+               src="./assets/stefania-2018.jpg"
+               alt="Stefania ut, Budapest, 2018. Trolleybus line 75 approaches the camera under a sky of trolley wires; cars line the sides of the street." />
+        </img-comparison-slider>
+      </div>
+
+      <div class="then-now-labels">
+        <span>1943</span>
+        <span>2018</span>
+      </div>
+      <p class="then-now-attribution">
+        Then: <a href="https://commons.wikimedia.org/wiki/File:Budapest_XIV.,_Stef%C3%A1nia_%C3%BAt_107.,_sv%C3%A1jci_k%C3%B6vets%C3%A9g_1943-ban_Fortepan_105687.jpg" rel="noopener">FORTEPAN / Archiv fur Zeitgeschichte ETH Zurich / Agnes Hirschi</a> via Wikimedia Commons (CC BY-SA 3.0).
+        Now: <a href="https://commons.wikimedia.org/wiki/File:75-%C3%B6s_trolibusz,_Stef%C3%A1nia_%C3%BAt,_2018_Zugl%C3%B3.jpg" rel="noopener">Globetrotter19</a> via Wikimedia Commons (CC BY-SA 3.0).
+      </p>
+    </section>
+
+    <!-- ============================================================
+         2. Pincehely village, Tolna County
+         then: August 1944 Fortepan photograph of Esztergom from Parkany
+               (rural Hungary the same month Judy was hidden in Pincehely)
+         now : 2025 Pasztilla photograph of the Pincehely Catholic church
+         ============================================================ -->
+    <section class="then-now-section" aria-labelledby="title-pincehely">
+      <h2 id="title-pincehely">Rural Hungary, the autumn Judy was hidden</h2>
+      <p class="then-now-caption">Judy was relocated to the village of Pincehely in Tolna County in autumn 1944 to escape Allied bombing. No clean-license photograph of Pincehely from the 1940s exists in any public archive we could verify. The wartime image you see on the left is the closest available temporal anchor, a peaceful countryside scene shot in <em>August 1944</em>, the very month Judy was hidden, but two hundred kilometres north of Pincehely. The right side is the church tower of Pincehely's Roman Catholic Church of the Visitation, photographed in 2025. Drag the divider to move between the two.</p>
+
+      <div class="then-now-frame">
+        <img-comparison-slider tabindex="0" aria-label="Hungary then-and-now comparison slider, drag to compare 1944 and 2025">
+          <img slot="first"
+               src="./assets/rural-hungary-1944.jpg"
+               alt="Rural Hungary, August 1944. View across the Danube from Parkany toward Esztergom. Cattle being washed at the river's edge, river barges and a steamship in the middle distance, the Esztergom Basilica visible on the far hill. Date 1944 handwritten in the bottom corner." />
+          <img slot="second"
+               src="./assets/pincehely-2025.jpg"
+               alt="Pincehely church tower, 2025. The yellow and brown bell tower of the Roman Catholic Church of the Visitation rises against a partly cloudy sky." />
+        </img-comparison-slider>
+      </div>
+
+      <div class="then-now-labels">
+        <span>August 1944</span>
+        <span>2025</span>
+      </div>
+      <p class="then-now-attribution">
+        Then: <a href="https://commons.wikimedia.org/wiki/File:Esztergom,_l%C3%A1tk%C3%A9p_P%C3%A1rk%C3%A1ny_fel%C5%91l._Fortepan_14965.jpg" rel="noopener">FORTEPAN / Album002 (Fortepan 14965)</a> via Wikimedia Commons (CC BY-SA 3.0). This photograph is of Esztergom on the Danube, not Pincehely. It is used here as a temporal anchor for August 1944.
+        Now: <a href="https://commons.wikimedia.org/wiki/File:Pincehely,_R%C3%B3mai_katolikus_t%C3%A9rj%C3%A9k%C5%91d%C3%A9s%C3%A9nak_Sz%C5%B1z_M%C3%A1ria-templom_2025_02.jpg" rel="noopener">Pasztilla / Attila Terbocs</a> via Wikimedia Commons (CC BY-SA 4.0).
+      </p>
+    </section>
+
+    <!-- ============================================================
+         3. Mile End, Montreal
+         then: 1948 Halifax Pier 21 immigrant arrival photograph
+         now : 2018 Mile End Saint-Viateur photograph
+         ============================================================ -->
+    <section class="then-now-section" aria-labelledby="title-mileend">
+      <h2 id="title-mileend">From Pier 21 to Saint-Viateur</h2>
+      <p class="then-now-caption">After the war Judy and her family came to Canada. Most Hungarian Jewish refugees arrived at Pier 21 in Halifax, then continued to cities including Montreal, where many settled in the Mile End neighbourhood. The 1948 photograph shows a young immigrant mother and her child waiting in the immigration shed at Pier 21. The 2018 photograph shows rue Saint-Viateur in Mile End, with the Saint-Viateur Bagel shop on the left, one of the original Jewish-immigrant-founded businesses still operating on the same street.</p>
+
+      <div class="then-now-frame">
+        <img-comparison-slider tabindex="0" aria-label="Mile End comparison slider, drag to compare 1948 and 2018">
+          <img slot="first"
+               src="./assets/halifax-pier21-1948.jpg"
+               alt="Pier 21, Halifax, 1948. A young immigrant mother in a wool coat sits in a wooden chair holding a baby wrapped in a heavy blanket; an immigration tag is pinned to her coat." />
+          <img slot="second"
+               src="./assets/mile-end-2018.jpg"
+               alt="Rue Saint-Viateur, Mile End, Montreal, October 2018. A street of brick three-storey row houses; the Saint-Viateur Bagel shop with its painted yellow and orange storefront sign is on the left." />
+        </img-comparison-slider>
+      </div>
+
+      <div class="then-now-labels">
+        <span>1948</span>
+        <span>2018</span>
+      </div>
+      <p class="then-now-attribution">
+        Then: E.A. Bollinger, <a href="https://commons.wikimedia.org/wiki/File:Halifax_Pier_21_immigrant_woman_with_baby,_1948.jpg" rel="noopener">Nova Scotia Archives</a>, public domain (Canada).
+        Now: <a href="https://commons.wikimedia.org/wiki/File:20181013_-_08_-_Montreal_(Mile_End).jpg" rel="noopener">Andre Carrotflower</a> via Wikimedia Commons (CC BY-SA 4.0).
+      </p>
+    </section>
+
+    <p class="then-now-back">
+      <a href="../">Back to the lesson</a>
+    </p>
+
+  </main>
+
+  <script type="module" src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+
+</body>
+</html>

@@ -13,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css" />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
@@ -29,6 +30,10 @@
       by Brandon Gluck
     </div>
     <div class="topbar__actions">
+      <div class="mode-toggle" role="group" aria-label="Display mode">
+        <button id="mode-read" class="mode-toggle__btn is-active" type="button" aria-pressed="true" aria-label="Read mode, default scrollytelling">Read</button>
+        <button id="mode-present" class="mode-toggle__btn" type="button" aria-pressed="false" aria-label="Present mode, single slide at a time">Present</button>
+      </div>
       <button id="play-audio" class="btn" type="button" aria-label="Play lesson narration audio">
         <span aria-hidden="true">&#9654;</span> Play audio
       </button>
@@ -44,6 +49,12 @@
     <p class="subtitle">A Grade 6 lesson on Judy Abrams' <em>Tenuous Threads</em></p>
     <p class="byline">Designed by Brandon Gluck</p>
     <div class="page-header__audio">
+      <div class="audio-pulse" id="audio-pulse" aria-hidden="true" data-state="idle">
+        <video class="audio-pulse__video" muted loop playsinline preload="metadata" poster="./assets/intros/audio-pulse.png">
+          <source src="./assets/intros/audio-pulse.mp4" type="video/mp4" />
+        </video>
+        <img class="audio-pulse__still" src="./assets/intros/audio-pulse.png" alt="" />
+      </div>
       <audio id="lesson-audio" controls preload="metadata" aria-label="Lesson narration audio">
         <source src="../audio/lesson-narration.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
@@ -59,7 +70,7 @@
     <article class="reading-column" aria-label="Lesson reading">
 
       <!-- Section: Lesson opener -->
-      <section class="lesson-section" id="opener" data-waypoint="">
+      <section class="lesson-section" id="opener" data-waypoint="" data-intro="lesson-info">
         <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Lesson opener</p>
         <h2>Where this lesson sits</h2>
         <p>This is a single-period close-reading lesson, sixty minutes, built around four pages of one Holocaust memoir, <em>Tenuous Threads</em> by Judy Abrams (Azrieli Foundation, 2011). It aligns to Ontario Grade 6 Social Studies (2023 revision) expectations <strong>A3.7</strong> and <strong>B3.5</strong>, the Holocaust education requirements added in the 2023 revision.</p>
@@ -81,7 +92,7 @@
       </section>
 
       <!-- Section: Minds On -->
-      <section class="lesson-section" id="minds-on" data-waypoint="">
+      <section class="lesson-section" id="minds-on" data-waypoint="" data-intro="minds-on">
         <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Minds On &middot; 5 minutes</p>
         <h2>What does your name carry?</h2>
         <p>Minds On is a routine, not a warm-up. Its job is to get students thinking with their own lives in the room before new content arrives. If we walk into Judy's words cold, the words land on whatever happens to be in the air that period. If we walk in having already thought for three minutes about our own names, Judy's name change has somewhere to land.</p>
@@ -101,7 +112,7 @@
       </section>
 
       <!-- Section: Meet Judy (Budapest 1937 waypoint) -->
-      <section class="lesson-section" id="meet-judy" data-waypoint="budapest-1937">
+      <section class="lesson-section" id="meet-judy" data-waypoint="budapest-1937" data-intro="meet-judy">
         <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Meet Judy &middot; Budapest, 1937</p>
         <h2>Meet Judy Abrams</h2>
         <p>She was born <strong>Judit Gr&uuml;nfeld</strong> in Budapest, Hungary, on <strong>April 28, 1937</strong>. Her parents were Ren&eacute;e (n&eacute;e Kaba) and L&aacute;szl&oacute; Gr&uuml;nfeld; her father was actively involved in the Hungarian Zionist Organization. She was an only child in a close, middle-class Budapest Jewish household, and the family included her maternal grandmother and her Aunt Marika. Her mother used affectionate Hungarian nicknames for her, the kind of small, ordinary words a child carries through her whole life.</p>
@@ -139,7 +150,7 @@
       </section>
 
       <!-- Section: Vocabulary -->
-      <section class="lesson-section" id="vocabulary" data-waypoint="">
+      <section class="lesson-section" id="vocabulary" data-waypoint="" data-intro="vocabulary">
         <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Vocabulary &middot; 6 words</p>
         <h2>Six words you'll need</h2>
         <p>These six words show up in the passage we are about to read, or in the conversation around it. We learn them now so that the first reading is uninterrupted.</p>
@@ -195,7 +206,7 @@
       </section>
 
       <!-- Section: The Reading I (Ursulines waypoint) -->
-      <section class="lesson-section" id="reading-1" data-waypoint="ursulines-1944">
+      <section class="lesson-section" id="reading-1" data-waypoint="ursulines-1944" data-intro="reading-i" data-year-intro="stefania" data-then-now="stefania">
         <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> The Reading &middot; Ursuline Mother House, Budapest, 1944</p>
         <h2>The Reading, part 1 of 2</h2>
         <p>Distribute pages 10-13 of <em>Tenuous Threads</em> (Azrieli Foundation, 2011). Read the passage aloud, or have students read silently for eight minutes. Free copies for Canadian educators are available at <a href="https://memoirs.azrielifoundation.org/education/memoirs/" target="_blank" rel="noopener">memoirs.azrielifoundation.org/education/memoirs</a>.</p>
@@ -241,10 +252,45 @@
             Becoming Ilona was not a single moment. It was a daily rhythm she had to perform, every hour, every day, for almost a year. Pretending was the work.
           </figcaption>
         </figure>
+
+        <!-- Then and Now: Stefania Street -->
+        <div class="then-now-block" data-then-now-id="stefania">
+          <div class="then-now-block__intro" aria-hidden="true">
+            <video class="then-now-block__video" muted playsinline preload="auto" poster="./assets/intros/year-transition-stefania.png">
+              <source src="./assets/intros/year-transition-stefania.mp4" type="video/mp4" />
+            </video>
+            <img class="then-now-block__still" src="./assets/intros/year-transition-stefania.png" alt="Title card transitioning from 1944 to today on Stefania Street, Budapest." />
+          </div>
+
+          <div class="then-now-block__slider">
+            <p class="then-now-block__title">Stef&aacute;nia Street, Budapest</p>
+            <p class="then-now-block__caption">Drag the gold divider. Stef&aacute;nia &uacute;t 107 in 1943, the wartime Swiss Embassy from which Carl Lutz issued protective letters that saved tens of thousands of Hungarian Jews. The same street in 2018, with trolleybus line 75 running where Judy walked as a child.</p>
+
+            <div class="then-now-frame">
+              <img-comparison-slider tabindex="0" aria-label="Stefania Street comparison slider, drag to compare 1943 and 2018">
+                <img slot="first"
+                     src="./then-now/assets/stefania-1943.jpg"
+                     alt="Stefania ut 107, Budapest, 1943. A leafless tree-lined street with the Swiss Embassy building behind a wrought-iron fence." />
+                <img slot="second"
+                     src="./then-now/assets/stefania-2018.jpg"
+                     alt="Stefania ut, Budapest, 2018. Trolleybus line 75 approaches the camera under a sky of trolley wires; cars line the sides of the street." />
+              </img-comparison-slider>
+            </div>
+
+            <div class="then-now-labels">
+              <span>1943</span>
+              <span>2018</span>
+            </div>
+
+            <a class="then-now-link" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=47.5009,19.0911" target="_blank" rel="noopener noreferrer" aria-label="Walk Stefania Street, Budapest, today on Google Street View, opens in new tab">
+              Walk this street today on Google Street View <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
       </section>
 
       <!-- Section: The Reading II (Pincehely waypoint) -->
-      <section class="lesson-section" id="reading-2" data-waypoint="pincehely-1944">
+      <section class="lesson-section" id="reading-2" data-waypoint="pincehely-1944" data-intro="reading-ii" data-year-intro="pincehely" data-then-now="pincehely">
         <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> The Reading &middot; arrival, autumn 1944</p>
         <h2>The Reading, part 2 of 2</h2>
         <p>The map has now moved to Pincehely, the small town in Tolna County where the Ursulines relocated Judy and other boarding students in autumn 1944 to escape Allied bombing of the capital. The relocation was brief but it removed her from the city at the most dangerous moment of the Hungarian deportations.</p>
@@ -277,6 +323,41 @@
             <p>Judy could have written "I was scared." She didn't. She wrote a sentence that makes the reader do a small piece of figuring out. That's a writer trusting her reader. Why is the pebble line stronger than "I was scared" would have been?</p>
           </div>
         </div>
+
+        <!-- Then and Now: Pincehely / rural Hungary, autumn 1944 -->
+        <div class="then-now-block" data-then-now-id="pincehely">
+          <div class="then-now-block__intro" aria-hidden="true">
+            <video class="then-now-block__video" muted playsinline preload="auto" poster="./assets/intros/year-transition-pincehely.png">
+              <source src="./assets/intros/year-transition-pincehely.mp4" type="video/mp4" />
+            </video>
+            <img class="then-now-block__still" src="./assets/intros/year-transition-pincehely.png" alt="Title card transitioning from autumn 1944 to today in Pincehely, Tolna County." />
+          </div>
+
+          <div class="then-now-block__slider">
+            <p class="then-now-block__title">Rural Hungary, the autumn Judy was hidden</p>
+            <p class="then-now-block__caption">A peaceful countryside scene, photographed in <em>August 1944</em>, the very month Judy was hidden in Pincehely. The right side is the bell tower of Pincehely's Roman Catholic Church of the Visitation, photographed in 2025. Drag the divider to move between the two.</p>
+
+            <div class="then-now-frame">
+              <img-comparison-slider tabindex="0" aria-label="Hungary then-and-now comparison slider, drag to compare 1944 and 2025">
+                <img slot="first"
+                     src="./then-now/assets/rural-hungary-1944.jpg"
+                     alt="Rural Hungary, August 1944. View across the Danube from Parkany toward Esztergom. Cattle being washed at the river's edge, river barges and a steamship in the middle distance, the Esztergom Basilica visible on the far hill." />
+                <img slot="second"
+                     src="./then-now/assets/pincehely-2025.jpg"
+                     alt="Pincehely church tower, 2025. The yellow and brown bell tower of the Roman Catholic Church of the Visitation rises against a partly cloudy sky." />
+              </img-comparison-slider>
+            </div>
+
+            <div class="then-now-labels">
+              <span>August 1944</span>
+              <span>2025</span>
+            </div>
+
+            <a class="then-now-link" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=46.7333,18.4500" target="_blank" rel="noopener noreferrer" aria-label="Walk Pincehely village, Hungary, today on Google Street View, opens in new tab">
+              Walk this village today on Google Street View <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
       </section>
 
       <!-- Section: Liberation -->
@@ -305,7 +386,7 @@
       </section>
 
       <!-- Section: Comprehension -->
-      <section class="lesson-section" id="comprehension" data-waypoint="">
+      <section class="lesson-section" id="comprehension" data-waypoint="" data-intro="comprehension">
         <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Comprehension &middot; returning to Judy's words</p>
         <h2>Comprehension questions</h2>
         <p>These questions take students back into the passage to read more carefully. They are designed to be answered orally in pairs first, then shared with the whole class. No written response is required during class.</p>
@@ -404,7 +485,7 @@
       </section>
 
       <!-- Section: Reflection -->
-      <section class="lesson-section" id="reflection" data-waypoint="montreal-1949">
+      <section class="lesson-section" id="reflection" data-waypoint="montreal-1949" data-intro="reflection" data-year-intro="montreal" data-then-now="montreal">
         <p class="section-eyebrow"><span class="dot" aria-hidden="true"></span> Reflection &middot; for tomorrow</p>
         <h2>Reflection. For tomorrow.</h2>
         <p>Written reflection on this passage happens 24 hours later, not in class today. The Azrieli Foundation's guidance on trauma-informed teaching recommends a cooling-off period between sensitive memoir content and a deeper written response, so that students sit with the reading overnight rather than rushing a paragraph while their feelings are still loud.</p>
@@ -426,6 +507,41 @@
         <div class="callout">
           <h3>Prompt C: The Foundation's work</h3>
           <p>The Azrieli Foundation publishes Canadian Holocaust survivor memoirs and provides them free to schools. Why might it matter that the memoirs are by Canadians specifically? Why might a Canadian Grade 6 student in 2026 read the words of a Hungarian-born survivor whose memoir was published in 2011?</p>
+        </div>
+
+        <!-- Then and Now: Mile End, Montreal -->
+        <div class="then-now-block" data-then-now-id="montreal">
+          <div class="then-now-block__intro" aria-hidden="true">
+            <video class="then-now-block__video" muted playsinline preload="auto" poster="./assets/intros/year-transition-montreal.png">
+              <source src="./assets/intros/year-transition-montreal.mp4" type="video/mp4" />
+            </video>
+            <img class="then-now-block__still" src="./assets/intros/year-transition-montreal.png" alt="Title card transitioning from 1949 to today in Mile End, Montreal." />
+          </div>
+
+          <div class="then-now-block__slider">
+            <p class="then-now-block__title">From Pier 21 to Saint-Viateur</p>
+            <p class="then-now-block__caption">Most Hungarian Jewish refugees arrived in Canada through Pier 21 in Halifax. The 1948 photograph shows a young immigrant mother and her child waiting in the immigration shed. The 2018 photograph shows rue Saint-Viateur in Mile End, with the Saint-Viateur Bagel shop on the left, one of the original Jewish-immigrant-founded businesses still operating on the same street.</p>
+
+            <div class="then-now-frame">
+              <img-comparison-slider tabindex="0" aria-label="Mile End comparison slider, drag to compare 1948 and 2018">
+                <img slot="first"
+                     src="./then-now/assets/halifax-pier21-1948.jpg"
+                     alt="Pier 21, Halifax, 1948. A young immigrant mother in a wool coat sits in a wooden chair holding a baby wrapped in a heavy blanket; an immigration tag is pinned to her coat." />
+                <img slot="second"
+                     src="./then-now/assets/mile-end-2018.jpg"
+                     alt="Rue Saint-Viateur, Mile End, Montreal, October 2018. A street of brick three-storey row houses; the Saint-Viateur Bagel shop with its painted yellow and orange storefront sign is on the left." />
+              </img-comparison-slider>
+            </div>
+
+            <div class="then-now-labels">
+              <span>1948</span>
+              <span>2018</span>
+            </div>
+
+            <a class="then-now-link" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=45.5219,-73.5957" target="_blank" rel="noopener noreferrer" aria-label="Walk Mile End, Montreal, today on Google Street View, opens in new tab">
+              Walk these streets today on Google Street View <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -475,23 +591,23 @@
           <div id="map" role="application" aria-label="Interactive map of Judy Abrams' wartime journey, advances as the lesson scrolls" tabindex="0"></div>
         </div>
 
-        <div class="streetview-panel" id="streetview-panel" aria-label="Street View links for the current waypoint">
+        <div class="streetview-panel" id="streetview-panel" aria-label="Then and now sliders inside the lesson">
           <p class="streetview-panel__title">Walk these streets today</p>
-          <p class="streetview-panel__intro">Three places from Judy's path are still walkable on Google Maps. Each link opens Street View in a new tab.</p>
+          <p class="streetview-panel__intro">As you scroll through the reading, three Then-and-Now sliders appear inline with the text. Drag the gold divider on each to see the same place across two decades. Each slider also links out to Google Street View.</p>
 
-          <a class="streetview-link" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=47.5009,19.0911" target="_blank" rel="noopener noreferrer" aria-label="Walk Stefania Street, Budapest, today on Google Street View, opens in new tab">
+          <a class="streetview-link" href="#reading-1" aria-label="Jump to the Stefania Street then-and-now slider">
             <strong>Stef&aacute;nia Street, Budapest</strong>
-            <span>The neighbourhood of the Ursuline Mother House</span>
+            <span>1943 next to 2018, inside The Reading, part 1</span>
           </a>
 
-          <a class="streetview-link" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=46.7333,18.4500" target="_blank" rel="noopener noreferrer" aria-label="Walk Pincehely village, Hungary, today on Google Street View, opens in new tab">
+          <a class="streetview-link" href="#reading-2" aria-label="Jump to the Pincehely village then-and-now slider">
             <strong>Pincehely village, Tolna County</strong>
-            <span>The rural Hungarian village where the convent relocated</span>
+            <span>August 1944 next to 2025, inside The Reading, part 2</span>
           </a>
 
-          <a class="streetview-link" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=45.5219,-73.5957" target="_blank" rel="noopener noreferrer" aria-label="Walk Mile End, Montreal, today on Google Street View, opens in new tab">
+          <a class="streetview-link" href="#reflection" aria-label="Jump to the Mile End, Montreal then-and-now slider">
             <strong>Mile End, Montreal</strong>
-            <span>Where many Hungarian Jewish refugees resettled in 1949</span>
+            <span>1948 next to 2018, inside Reflection</span>
           </a>
         </div>
 
@@ -499,6 +615,26 @@
     </aside>
 
   </main>
+
+  <!-- ===== Slide-mode chrome (hidden in read mode) ===== -->
+  <div id="slide-nav" class="slide-nav" aria-hidden="true">
+    <button id="slide-prev" class="slide-nav__btn" type="button" aria-label="Previous slide">
+      <span aria-hidden="true">&larr;</span> Previous
+    </button>
+    <span id="slide-progress" class="slide-nav__progress" aria-live="polite">Slide 1 of 1</span>
+    <button id="slide-next" class="slide-nav__btn" type="button" aria-label="Next slide">
+      Next <span aria-hidden="true">&rarr;</span>
+    </button>
+    <button id="slide-exit" class="slide-nav__exit" type="button" aria-label="Exit present mode and return to reading">
+      Exit present <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div id="intro-overlay" class="intro-overlay" aria-hidden="true">
+    <video id="intro-overlay-video" class="intro-overlay__video" muted playsinline preload="auto"></video>
+    <img id="intro-overlay-still" class="intro-overlay__still" alt="" />
+    <button id="intro-overlay-skip" class="intro-overlay__skip" type="button" aria-label="Skip this intro card">Skip</button>
+  </div>
 
   <!-- ===== Footer ===== -->
   <footer class="page-footer">
@@ -508,6 +644,7 @@
 
   <!-- ===== Scripts ===== -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
   <script src="../journey-map/waypoints.js"></script>
   <script src="./controller.js"></script>
 

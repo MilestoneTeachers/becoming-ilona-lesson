@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Becoming Ilona, A Digital Immersive Lesson on Judy Abrams' Tenuous Threads</title>
+  <meta name="description" content="A Grade 6 digital immersive lesson on Judy Abrams' Holocaust memoir Tenuous Threads. Designed by Brandon Gluck. Welcome screen featuring the names Judit Grunfeld, Ilona Papp, Judy Abrams." />
+  <meta name="author" content="Brandon Gluck" />
+  <meta name="robots" content="index,follow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./style.css" />
+
+  <style>
+    /* ====================================================
+       Welcome screen: full-bleed entry that plays the
+       survivor-opener intro then reveals the Enter button.
+       Reuses brand variables from style.css.
+       ==================================================== */
+
+    body.welcome-body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--paper);
+      overflow-x: hidden;
+    }
+
+    /* Gold corner triangle (matches the rest of the lesson) */
+    .welcome-corner {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 96px 96px 0;
+      border-color: transparent var(--gold) transparent transparent;
+      opacity: 0.95;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* Skip link styled as a real visible link in the top-right
+       corner so a sighted user can also reach it without
+       waiting for the video. */
+    a.welcome-skip {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      z-index: 30;
+      transition: background var(--transition);
+    }
+    a.welcome-skip:hover,
+    a.welcome-skip:focus {
+      background: var(--gold-deep);
+      outline: none;
+    }
+
+    main.welcome-main {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 88px 24px 56px;
+      max-width: 960px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .welcome-eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      font-weight: 700;
+      margin: 0 0 12px;
+    }
+
+    .welcome-title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 7vw, 72px);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin: 0 0 12px;
+      color: var(--ink);
+    }
+
+    .welcome-subtitle {
+      font-size: clamp(16px, 2vw, 19px);
+      font-style: italic;
+      color: var(--ink-soft);
+      margin: 0 0 32px;
+      max-width: 620px;
+      line-height: 1.5;
+    }
+
+    .welcome-video-frame {
+      position: relative;
+      width: 100%;
+      max-width: 720px;
+      aspect-ratio: 3 / 2;
+      background: var(--paper-warm);
+      border: 1px solid var(--ink-rule);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 6px 28px rgba(0, 0, 0, 0.08);
+      margin: 0 auto 28px;
+    }
+
+    .welcome-video-frame video,
+    .welcome-video-frame img.welcome-still {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .welcome-video-frame img.welcome-still {
+      display: none;
+    }
+
+    /* Three names visible in HTML for SEO + screen readers */
+    .welcome-names {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px 32px;
+      margin: 0 0 32px;
+      list-style: none;
+      padding: 0;
+    }
+    .welcome-names li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 180px;
+    }
+    .welcome-names .name {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.6vw, 26px);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin: 0;
+      line-height: 1.1;
+    }
+    .welcome-names .span {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      font-weight: 700;
+      margin-top: 4px;
+    }
+    .welcome-names .where {
+      font-size: 13px;
+      color: var(--ink-muted);
+      margin-top: 2px;
+      font-style: italic;
+    }
+
+    /* Enter button: hidden until the video ends, then fades in. */
+    .welcome-enter {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--ink);
+      color: var(--paper);
+      border: 1px solid var(--ink);
+      padding: 16px 32px;
+      font: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 2px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 600ms ease, transform 600ms ease, background var(--transition);
+    }
+    .welcome-enter.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .welcome-enter:hover,
+    .welcome-enter:focus {
+      background: var(--gold-deep);
+      border-color: var(--gold-deep);
+      outline: none;
+    }
+    .welcome-enter .arrow {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .welcome-credit {
+      margin: 28px 0 0;
+      font-size: 12px;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* Reduced motion: hide video, show still PNG, button visible immediately */
+    @media (prefers-reduced-motion: reduce) {
+      .welcome-video-frame video { display: none; }
+      .welcome-video-frame img.welcome-still { display: block; }
+      .welcome-enter { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 720px) {
+      main.welcome-main { padding: 72px 16px 48px; }
+      .welcome-corner { border-width: 0 64px 64px 0; }
+      .welcome-names { gap: 14px; }
+      .welcome-names li { min-width: 140px; }
+      a.welcome-skip {
+        top: 12px;
+        left: 12px;
+        padding: 8px 12px;
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+
+<body class="welcome-body">
+
+  <a href="./index.html" class="welcome-skip" id="welcome-skip">Skip animation, enter now</a>
+
+  <div class="welcome-corner" aria-hidden="true"></div>
+
+  <main class="welcome-main" role="main">
+
+    <p class="welcome-eyebrow">A Grade 6 lesson on Judy Abrams' <em>Tenuous Threads</em></p>
+    <h1 class="welcome-title">Becoming Ilona</h1>
+    <p class="welcome-subtitle">A digital immersive close reading of one Holocaust survivor's memoir, designed by Brandon Gluck.</p>
+
+    <div class="welcome-video-frame">
+      <video id="welcome-video"
+             autoplay
+             muted
+             playsinline
+             preload="auto"
+             aria-label="Animated opener naming the survivor in three names: Judit Grunfeld, Ilona Papp, Judy Abrams.">
+        <source src="./assets/intros/survivor-opener.mp4" type="video/mp4" />
+      </video>
+      <img class="welcome-still"
+           src="./assets/intros/survivor-opener.png"
+           alt="Three names stacked: Judit Grunfeld, Ilona Papp, Judy Abrams. Each name is dated by the years she was known by it." />
+    </div>
+
+    <ol class="welcome-names" aria-label="One survivor, three names across her life">
+      <li>
+        <span class="span">1937 to 1944</span>
+        <p class="name">Judit Grunfeld</p>
+        <span class="where">Budapest</span>
+      </li>
+      <li>
+        <span class="span">1944 to 1945</span>
+        <p class="name">Ilona Papp</p>
+        <span class="where">in hiding</span>
+      </li>
+      <li>
+        <span class="span">1949 onward</span>
+        <p class="name">Judy Abrams</p>
+        <span class="where">Montreal</span>
+      </li>
+    </ol>
+
+    <a href="./index.html" id="welcome-enter" class="welcome-enter" role="button" aria-label="Enter the lesson">
+      Enter the lesson <span class="arrow" aria-hidden="true">&rarr;</span>
+    </a>
+
+    <p class="welcome-credit">Press Enter, space, or click to begin</p>
+
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var video = document.getElementById("welcome-video");
+      var enterBtn = document.getElementById("welcome-enter");
+      var skipLink = document.getElementById("welcome-skip");
+
+      var prefersReducedMotion = window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function revealEnter() {
+        if (!enterBtn) { return; }
+        enterBtn.classList.add("is-visible");
+        // Move keyboard focus to the Enter button so a screen reader user
+        // hears it announced and can press Return to continue.
+        try { enterBtn.focus({ preventScroll: true }); } catch (e) { enterBtn.focus(); }
+      }
+
+      // If reduced motion: button is visible immediately via CSS, focus it.
+      if (prefersReducedMotion) {
+        revealEnter();
+      }
+
+      if (video && !prefersReducedMotion) {
+        // Reveal the enter button when the intro ends.
+        video.addEventListener("ended", revealEnter);
+
+        // Fallback: if video errors or never loads, reveal after 8 seconds.
+        var fallbackTimer = window.setTimeout(revealEnter, 8000);
+        video.addEventListener("ended", function () {
+          window.clearTimeout(fallbackTimer);
+        });
+        video.addEventListener("error", function () {
+          window.clearTimeout(fallbackTimer);
+          revealEnter();
+        });
+
+        // If autoplay was blocked, reveal the still image and the button.
+        var playPromise = video.play();
+        if (playPromise && typeof playPromise.then === "function") {
+          playPromise.catch(function () {
+            window.clearTimeout(fallbackTimer);
+            revealEnter();
+          });
+        }
+      }
+
+      // Keyboard: Enter or Space anywhere on the page navigates to the lesson.
+      document.addEventListener("keydown", function (e) {
+        var key = e.key;
+        if (key === "Enter" || key === " " || key === "Spacebar") {
+          // Don't hijack if the user is focused on the skip link or an input.
+          var active = document.activeElement;
+          if (active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA")) {
+            return;
+          }
+          e.preventDefault();
+          window.location.href = "./index.html";
+        }
+      });
+
+      // Mark that the user has seen the welcome screen so the main lesson
+      // can show a "back to welcome" affordance only if it's relevant.
+      try {
+        window.localStorage.setItem("azrieli_seen_welcome", "1");
+      } catch (e) { /* ignore storage errors */ }
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "filename": "esztergom-parkany-landscape-aug1944-fortepan.jpg",
+  "subject": "Hungarian rural landscape: view of Esztergom from Parkany side of the Danube, August 1944. Cattle and a barge on the river.",
+  "depicts_judy_directly": false,
+  "depicts_pincehely": false,
+  "context_for_lesson": "A peaceful Hungarian countryside photograph taken in August 1944. This is the closest period photograph available under a clear Wikimedia Commons license that shows rural Hungary at the exact moment Judy Abrams was hidden in the Tolna County village of Pincehely (autumn 1944). It is NOT Pincehely. It is Esztergom (Komarom-Esztergom County, northern Hungary, on the Danube), about 200 km north of Pincehely. The rural visual register, livestock, river barges, and unhurried countryside is consistent with the wartime Hungary Judy would have moved through. Use only with a caption that is explicit about the geographic difference, e.g. 'Hungarian countryside, August 1944. This is Esztergom on the Danube, not Pincehely. The lesson uses it as a visual anchor for the rural Hungary that Judy was hidden in that same month.'",
+  "source_url": "https://commons.wikimedia.org/wiki/File:Esztergom,_l%C3%A1tk%C3%A9p_P%C3%A1rk%C3%A1ny_fel%C5%91l._Fortepan_14965.jpg",
+  "direct_file_url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Esztergom%2C_l%C3%A1tk%C3%A9p_P%C3%A1rk%C3%A1ny_fel%C5%91l._Fortepan_14965.jpg",
+  "publisher_or_host": "Wikimedia Commons (originally from Fortepan archive, Album002, ID 14965)",
+  "author": "FOTO:FORTEPAN / Album002",
+  "date_taken": "August 1944",
+  "date_accessed": "2026-05-08",
+  "license_text_verbatim": "Creative Commons Attribution-Share Alike 3.0 Unported",
+  "license_summary": "CC BY-SA 3.0, free to use, share, and adapt with attribution; derivative works must use the same license",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "attribution_required": "Photo: FORTEPAN / Album002 via Wikimedia Commons (CC BY-SA 3.0)",
+  "lesson_use_intent": "Use as the 'then' frame in a Then-and-Now image-comparison slider for the Pincehely waypoint. The 'now' frame is the 2025 Pasztilla photograph of the Pincehely Catholic church. The slider caption MUST state plainly that the period image is Esztergom, not Pincehely, and that the choice is a temporal anchor for August 1944, not a spatial claim. No clean-license 1940s photograph of Pincehely itself is available on Wikimedia Commons (verified 2026-05-08, Wikimedia Commons category Pincehely contains only post-2000 photographs).",
+  "resolution_pixels": "very high resolution (~11 MB JPEG)",
+  "verified_subject": true,
+  "concerns": "GEOGRAPHIC HONESTY REQUIRED. This is not Pincehely. The slider must caption it correctly. Do not crop or label in a way that implies the photograph shows Pincehely.",
+  "search_provenance": {
+    "queries_attempted": [
+      "commons:Category:Pincehely (no 1940s photos)",
+      "commons:Category:Tolna_County_in_the_1940s (404, does not exist)",
+      "commons:Category:Tolna_County (no 1940s decade subcategory)",
+      "commons:MediaSearch Pincehely+1940 (zero results)",
+      "commons:MediaSearch Tolna+1944+Fortepan (zero results)",
+      "commons:MediaSearch Magyar+falu+1944+Fortepan (zero results)",
+      "commons:MediaSearch Hungarian+rural+village+1940s+Fortepan (zero results)",
+      "commons:Category:Cities_and_villages_in_Tolna_County_(Kingdom_of_Hungary) (empty redirect)",
+      "commons:Category:1944_photographs_of_Hungary (organized by month, no Tolna or Pincehely)",
+      "commons:Category:Churches_in_Hungary_photographed_in_1944 (5 files, all interiors, none Tolna)",
+      "commons:Category:August_1944_Hungary_photographs (3 files, this Esztergom landscape selected as best fit)",
+      "fortepan.hu: Pincehely + Tolna+1944 (interface returned no harvestable thumbnails via WebFetch)"
+    ],
+    "selection_rationale": "Closest available match temporally (August 1944 = same month Judy was hidden in Pincehely), peaceful rural countryside register matches what the Tolna village would have looked like, clean CC BY-SA 3.0 license, high resolution. Geographic honesty handled via caption."
+  }
+}

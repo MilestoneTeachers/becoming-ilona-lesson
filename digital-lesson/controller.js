@@ -348,9 +348,26 @@
     var audio = document.getElementById("lesson-audio");
     var playBtn = document.getElementById("play-audio");
     var statusLine = document.getElementById("audio-status");
+    var pulse = document.getElementById("audio-pulse");
+    var pulseVideo = pulse ? pulse.querySelector(".audio-pulse__video") : null;
+
     if (!audio || !playBtn) { return; }
 
     var available = false;
+
+    function setPulseState(state) {
+      if (!pulse) { return; }
+      pulse.setAttribute("data-state", state);
+      if (state === "playing" && pulseVideo) {
+        try {
+          pulseVideo.currentTime = 0;
+          var p = pulseVideo.play();
+          if (p && typeof p.catch === "function") { p.catch(function () {}); }
+        } catch (e) { /* ignore */ }
+      } else if (pulseVideo) {
+        try { pulseVideo.pause(); } catch (e) { /* ignore */ }
+      }
+    }
 
     audio.addEventListener("loadedmetadata", function () {
       available = true;
@@ -386,14 +403,403 @@
       }
     });
 
+    audio.addEventListener("play", function () {
+      setPulseState("playing");
+    });
+
     audio.addEventListener("pause", function () {
       playBtn.innerHTML = '<span aria-hidden="true">&#9654;</span> Play audio';
       playBtn.setAttribute("aria-label", "Play lesson narration audio");
+      setPulseState("paused");
     });
     audio.addEventListener("ended", function () {
       playBtn.innerHTML = '<span aria-hidden="true">&#9654;</span> Play audio';
       playBtn.setAttribute("aria-label", "Play lesson narration audio");
+      setPulseState("paused");
     });
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Then-and-Now intro triggers (year-transition Remotion videos)       */
+  /* ------------------------------------------------------------------ */
+
+  function setupThenNowIntros() {
+    var blocks = $all(".then-now-block");
+    if (!blocks.length) { return; }
+
+    var reveal = function (block) {
+      if (block.dataset.revealed === "1") { return; }
+      block.dataset.revealed = "1";
+      var video = block.querySelector(".then-now-block__video");
+      var slider = block.querySelector(".then-now-block__slider");
+
+      if (prefersReducedMotion() || !video) {
+        // Skip the intro: jump straight to revealing the slider.
+        block.classList.add("is-revealed");
+        return;
+      }
+
+      block.classList.add("is-intro-playing");
+
+      var playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(function () {
+          // Autoplay blocked: still reveal the slider.
+          block.classList.remove("is-intro-playing");
+          block.classList.add("is-intro-played", "is-revealed");
+        });
+      }
+
+      var revealAfter = function () {
+        block.classList.remove("is-intro-playing");
+        block.classList.add("is-intro-played", "is-revealed");
+      };
+      video.addEventListener("ended", revealAfter, { once: true });
+      // Backstop: if the ended event never fires (e.g. video error),
+      // reveal after 3.5 seconds.
+      window.setTimeout(revealAfter, 3500);
+    };
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.15) {
+          reveal(entry.target);
+        }
+      });
+    }, {
+      threshold: [0.15, 0.4],
+      rootMargin: "0px 0px -10% 0px"
+    });
+
+    blocks.forEach(function (b) { io.observe(b); });
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Slide mode (Read | Present toggle, keyboard + touch nav)            */
+  /* ------------------------------------------------------------------ */
+
+  function setupSlideMode(mapController) {
+    var readBtn = document.getElementById("mode-read");
+    var presentBtn = document.getElementById("mode-present");
+    var slideNav = document.getElementById("slide-nav");
+    var prevBtn = document.getElementById("slide-prev");
+    var nextBtn = document.getElementById("slide-next");
+    var exitBtn = document.getElementById("slide-exit");
+    var progress = document.getElementById("slide-progress");
+    var introOverlay = document.getElementById("intro-overlay");
+    var overlayVideo = document.getElementById("intro-overlay-video");
+    var overlayStill = document.getElementById("intro-overlay-still");
+    var overlaySkip = document.getElementById("intro-overlay-skip");
+
+    if (!readBtn || !presentBtn) { return; }
+
+    var sections = $all(".lesson-section");
+    var currentIndex = 0;
+    var inSlideMode = false;
+    var isShowingIntro = false;
+
+    function readMode() { return !inSlideMode; }
+
+    function getStored(key) {
+      try { return window.localStorage.getItem(key); }
+      catch (e) { return null; }
+    }
+    function setStored(key, value) {
+      try { window.localStorage.setItem(key, value); }
+      catch (e) { /* ignore */ }
+    }
+
+    function updateProgress() {
+      if (!progress) { return; }
+      progress.textContent = "Slide " + (currentIndex + 1) + " of " + sections.length;
+      if (prevBtn) { prevBtn.disabled = (currentIndex === 0); }
+      if (nextBtn) { nextBtn.disabled = (currentIndex === sections.length - 1); }
+    }
+
+    function applyCurrentSection(skipFade) {
+      sections.forEach(function (s, i) {
+        if (i === currentIndex) {
+          s.classList.add("is-current");
+        } else {
+          s.classList.remove("is-current", "is-fading");
+        }
+      });
+      updateProgress();
+
+      // Fire any waypoint binding so the map state stays correct
+      // (even though the map is hidden in slide mode, the controller
+      // remains the single source of truth for "where are we").
+      var waypointId = sections[currentIndex].getAttribute("data-waypoint");
+      if (waypointId && mapController) {
+        if (waypointId === "all") {
+          mapController.showAll();
+        } else {
+          mapController.showWaypoint(waypointId);
+        }
+      }
+
+      // Trigger any inline year-transition + then-now block reveals on the
+      // current slide (the IntersectionObserver doesn't fire in slide
+      // mode because non-current sections are display:none).
+      var blocks = sections[currentIndex].querySelectorAll(".then-now-block");
+      blocks.forEach(function (b) {
+        if (b.dataset.revealed === "1") { return; }
+        b.dataset.revealed = "1";
+        if (prefersReducedMotion()) {
+          b.classList.add("is-revealed");
+          return;
+        }
+        var v = b.querySelector(".then-now-block__video");
+        b.classList.add("is-intro-playing");
+        if (v) {
+          v.play().catch(function () {
+            b.classList.remove("is-intro-playing");
+            b.classList.add("is-intro-played", "is-revealed");
+          });
+          v.addEventListener("ended", function () {
+            b.classList.remove("is-intro-playing");
+            b.classList.add("is-intro-played", "is-revealed");
+          }, { once: true });
+        }
+        window.setTimeout(function () {
+          b.classList.remove("is-intro-playing");
+          b.classList.add("is-intro-played", "is-revealed");
+        }, 3500);
+      });
+    }
+
+    function playOverlay(introKey, onDone) {
+      if (!introOverlay || !overlayVideo) { onDone && onDone(); return; }
+      var srcMp4 = "./assets/intros/section-" + introKey + ".mp4";
+      var srcPng = "./assets/intros/section-" + introKey + ".png";
+
+      // Special intros use different prefixes:
+      if (introKey === "now-presenting") {
+        srcMp4 = "./assets/intros/now-presenting.mp4";
+        srcPng = "./assets/intros/now-presenting.png";
+      }
+
+      isShowingIntro = true;
+      overlayStill.src = srcPng;
+      overlayStill.alt = "Section card preview for " + introKey;
+      overlayVideo.innerHTML = "";
+      var source = document.createElement("source");
+      source.src = srcMp4;
+      source.type = "video/mp4";
+      overlayVideo.appendChild(source);
+      overlayVideo.load();
+
+      introOverlay.classList.add("is-visible");
+      introOverlay.setAttribute("aria-hidden", "false");
+
+      var done = function () {
+        if (!isShowingIntro) { return; }
+        isShowingIntro = false;
+        introOverlay.classList.remove("is-visible");
+        introOverlay.setAttribute("aria-hidden", "true");
+        try { overlayVideo.pause(); } catch (e) {}
+        if (onDone) { onDone(); }
+      };
+
+      if (prefersReducedMotion()) {
+        // Show the still for 1.6s, then proceed.
+        window.setTimeout(done, 1600);
+        return;
+      }
+
+      var p = overlayVideo.play();
+      if (p && typeof p.catch === "function") {
+        p.catch(function () { done(); });
+      }
+      overlayVideo.addEventListener("ended", done, { once: true });
+      // Backstop in case ended never fires:
+      window.setTimeout(done, 4500);
+
+      // Allow user to skip the overlay
+      var skipHandler = function () {
+        overlaySkip.removeEventListener("click", skipHandler);
+        done();
+      };
+      overlaySkip.addEventListener("click", skipHandler);
+    }
+
+    function goTo(targetIndex, withIntro) {
+      if (targetIndex < 0 || targetIndex >= sections.length) { return; }
+      if (targetIndex === currentIndex) { return; }
+
+      var fade = function () {
+        var current = sections[currentIndex];
+        if (current) { current.classList.add("is-fading"); }
+        window.setTimeout(function () {
+          currentIndex = targetIndex;
+          applyCurrentSection();
+        }, 280);
+      };
+
+      if (withIntro) {
+        var key = sections[targetIndex].getAttribute("data-intro");
+        if (key) {
+          playOverlay(key, fade);
+          return;
+        }
+      }
+      fade();
+    }
+
+    function enterSlideMode(skipNowPresentingIntro) {
+      inSlideMode = true;
+      document.body.classList.add("slide-mode");
+      readBtn.classList.remove("is-active");
+      readBtn.setAttribute("aria-pressed", "false");
+      presentBtn.classList.add("is-active");
+      presentBtn.setAttribute("aria-pressed", "true");
+      if (slideNav) { slideNav.setAttribute("aria-hidden", "false"); }
+
+      // Pick the section currently most visible to start from
+      var anchorY = window.innerHeight * 0.33;
+      var bestIdx = 0;
+      var bestScore = Infinity;
+      sections.forEach(function (s, i) {
+        var rect = s.getBoundingClientRect();
+        var dist = Math.abs(rect.top - anchorY);
+        if (dist < bestScore) { bestScore = dist; bestIdx = i; }
+      });
+      currentIndex = bestIdx;
+      applyCurrentSection(true);
+
+      var seenNow = getStored("azrieli_seen_now_presenting");
+      if (!seenNow && !skipNowPresentingIntro) {
+        playOverlay("now-presenting", function () {
+          setStored("azrieli_seen_now_presenting", "1");
+        });
+      }
+    }
+
+    function exitSlideMode() {
+      inSlideMode = false;
+      document.body.classList.remove("slide-mode");
+      readBtn.classList.add("is-active");
+      readBtn.setAttribute("aria-pressed", "true");
+      presentBtn.classList.remove("is-active");
+      presentBtn.setAttribute("aria-pressed", "false");
+      if (slideNav) { slideNav.setAttribute("aria-hidden", "true"); }
+      sections.forEach(function (s) {
+        s.classList.remove("is-current", "is-fading");
+      });
+      // Hide any visible overlay too
+      if (introOverlay) {
+        introOverlay.classList.remove("is-visible");
+        introOverlay.setAttribute("aria-hidden", "true");
+      }
+      // Scroll the section the user was on into view (read mode is back).
+      var target = sections[currentIndex];
+      if (target) {
+        target.scrollIntoView({ behavior: "auto", block: "start" });
+      }
+      setStored("azrieli_mode", "read");
+    }
+
+    readBtn.addEventListener("click", function () {
+      if (inSlideMode) { exitSlideMode(); }
+    });
+    presentBtn.addEventListener("click", function () {
+      if (!inSlideMode) {
+        enterSlideMode(false);
+        setStored("azrieli_mode", "present");
+      }
+    });
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        if (currentIndex > 0) { goTo(currentIndex - 1, false); }
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        if (currentIndex < sections.length - 1) {
+          goTo(currentIndex + 1, true);
+        }
+      });
+    }
+    if (exitBtn) {
+      exitBtn.addEventListener("click", exitSlideMode);
+    }
+
+    // Keyboard navigation in slide mode
+    document.addEventListener("keydown", function (e) {
+      if (!inSlideMode) { return; }
+      // Don't hijack typing inside form fields.
+      var active = document.activeElement;
+      if (active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA")) {
+        return;
+      }
+      // If the intro overlay is showing, Esc skips it.
+      if (isShowingIntro) {
+        if (e.key === "Escape" || e.key === "Esc") {
+          e.preventDefault();
+          if (overlaySkip) { overlaySkip.click(); }
+        }
+        return;
+      }
+      switch (e.key) {
+        case "ArrowRight":
+        case " ":
+        case "Spacebar":
+        case "PageDown":
+          e.preventDefault();
+          if (currentIndex < sections.length - 1) {
+            goTo(currentIndex + 1, true);
+          }
+          break;
+        case "ArrowLeft":
+        case "PageUp":
+          e.preventDefault();
+          if (currentIndex > 0) {
+            goTo(currentIndex - 1, false);
+          }
+          break;
+        case "Escape":
+        case "Esc":
+          e.preventDefault();
+          exitSlideMode();
+          break;
+        default: break;
+      }
+    });
+
+    // Touch swipe handlers (slide mode only)
+    var touchStartX = null;
+    var touchStartY = null;
+    document.addEventListener("touchstart", function (e) {
+      if (!inSlideMode || !e.touches || !e.touches.length) { return; }
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    document.addEventListener("touchend", function (e) {
+      if (!inSlideMode || touchStartX === null) { return; }
+      var changed = e.changedTouches && e.changedTouches[0];
+      if (!changed) { touchStartX = null; return; }
+      var dx = changed.clientX - touchStartX;
+      var dy = changed.clientY - touchStartY;
+      touchStartX = null;
+      touchStartY = null;
+      // Need a clearly horizontal gesture, at least 60px in X.
+      if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy)) { return; }
+      if (dx < 0) {
+        // Swipe left: next
+        if (currentIndex < sections.length - 1) { goTo(currentIndex + 1, true); }
+      } else {
+        // Swipe right: previous
+        if (currentIndex > 0) { goTo(currentIndex - 1, false); }
+      }
+    }, { passive: true });
+
+    // Restore mode preference from a previous visit.
+    var saved = getStored("azrieli_mode");
+    if (saved === "present") {
+      // Defer so the layout is ready first.
+      window.setTimeout(function () { enterSlideMode(false); }, 60);
+    }
   }
 
   /* ------------------------------------------------------------------ */
@@ -426,6 +832,8 @@
     setupSectionObserver(controller);
     setupAudio();
     setupResize(map);
+    setupThenNowIntros();
+    setupSlideMode(controller);
 
     // After a short delay, ensure the map has measured itself (sticky containers
     // sometimes initialize at zero size on first paint).
