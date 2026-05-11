@@ -1,5 +1,5 @@
 {
-  "totalDurationSeconds": 300,
+  "totalDurationSeconds": 320,
   "narration": {
     "src": "./narration/festival-cut.mp3",
     "captions": "./narration/festival-cut.vtt"
@@ -25,7 +25,7 @@
       "id": "ch2-before",
       "title": "CHAPTER 2 — BEFORE",
       "startSeconds": 30,
-      "endSeconds": 105,
+      "endSeconds": 110,
       "musicCue": null,
       "pauseAfter": {
         "prompt": "What made Judy's family decide she had to hide?",
@@ -33,43 +33,46 @@
       },
       "beats": [
         { "type": "title", "asset": "./chapter-cards/ch2-before.mp4", "startSeconds": 30, "endSeconds": 42 },
-        { "type": "ken-burns-photo", "asset": "../../photos/judy/budapest-park-baby-carriages-1938-fortepan.jpg", "startSeconds": 42, "endSeconds": 67, "panFrom": { "x": 0.3, "y": 0.5, "zoom": 1.0 }, "panTo": { "x": 0.7, "y": 0.5, "zoom": 1.35 } },
+        { "type": "ken-burns-photo", "asset": "../../photos/judy/budapest-park-baby-carriages-1938-fortepan.jpg", "startSeconds": 42, "endSeconds": 60, "panFrom": { "x": 0.3, "y": 0.5, "zoom": 1.0 }, "panTo": { "x": 0.7, "y": 0.5, "zoom": 1.35 } },
+        { "type": "veo-atmospheric", "asset": "./atmospheric/alternates/candle-windowsill-alt.mp4", "startSeconds": 60, "endSeconds": 67, "loop": true },
         { "type": "remotion-moment", "asset": "./moments-new/march-1944-empty-room.mp4", "startSeconds": 67, "endSeconds": 90 },
-        { "type": "veo-atmospheric", "asset": "./atmospheric/candle-windowsill.mp4", "startSeconds": 90, "endSeconds": 105, "loop": true }
+        { "type": "veo-atmospheric", "asset": "./atmospheric/candle-windowsill.mp4", "startSeconds": 90, "endSeconds": 110, "loop": true }
       ]
     },
     {
       "id": "ch3-during",
       "title": "CHAPTER 3 — DURING",
-      "startSeconds": 105,
-      "endSeconds": 210,
+      "startSeconds": 110,
+      "endSeconds": 220,
       "musicCue": null,
       "pauseAfter": {
         "prompt": "What part of your own life would be hardest to set aside for a year?",
         "framingNote": "Think about your name, your language, your routines. Not about being Judy — about being you. Write or sketch one thing. Then press Continue."
       },
       "beats": [
-        { "type": "title", "asset": "./chapter-cards/ch3-during.mp4", "startSeconds": 105, "endSeconds": 117 },
-        { "type": "then-now-slider", "leftSrc": "../then-now/assets/stefania-1943.jpg", "rightSrc": "../then-now/assets/stefania-2018.jpg", "startSeconds": 117, "endSeconds": 140 },
-        { "type": "remotion-moment", "asset": "../assets/moments/cover-story-checklist.mp4", "startSeconds": 140, "endSeconds": 165 },
-        { "type": "remotion-moment", "asset": "../assets/moments/hidden-child-daily-clock.mp4", "startSeconds": 165, "endSeconds": 185 },
-        { "type": "remotion-moment", "asset": "../assets/moments/two-names-toggle.mp4", "startSeconds": 185, "endSeconds": 200 },
-        { "type": "veo-atmospheric", "asset": "./atmospheric/snow-cobblestones.mp4", "startSeconds": 200, "endSeconds": 210, "loop": true }
+        { "type": "title", "asset": "./chapter-cards/ch3-during.mp4", "startSeconds": 110, "endSeconds": 122 },
+        { "type": "then-now-slider", "leftSrc": "../then-now/assets/stefania-1943.jpg", "rightSrc": "../then-now/assets/stefania-2018.jpg", "startSeconds": 122, "endSeconds": 142 },
+        { "type": "veo-atmospheric", "asset": "./atmospheric/alternates/snow-cobblestones-alt.mp4", "startSeconds": 142, "endSeconds": 150, "loop": true },
+        { "type": "remotion-moment", "asset": "../assets/moments/cover-story-checklist.mp4", "startSeconds": 150, "endSeconds": 172 },
+        { "type": "remotion-moment", "asset": "../assets/moments/hidden-child-daily-clock.mp4", "startSeconds": 172, "endSeconds": 192 },
+        { "type": "remotion-moment", "asset": "../assets/moments/two-names-toggle.mp4", "startSeconds": 192, "endSeconds": 208 },
+        { "type": "veo-atmospheric", "asset": "./atmospheric/snow-cobblestones.mp4", "startSeconds": 208, "endSeconds": 220, "loop": true }
       ]
     },
     {
       "id": "ch4-after",
       "title": "CHAPTER 4 — AFTER",
-      "startSeconds": 210,
-      "endSeconds": 300,
+      "startSeconds": 220,
+      "endSeconds": 320,
       "musicCue": null,
       "beats": [
-        { "type": "title", "asset": "./chapter-cards/ch4-after.mp4", "startSeconds": 210, "endSeconds": 222 },
-        { "type": "remotion-moment", "asset": "./moments-new/liberation-1945.mp4", "startSeconds": 222, "endSeconds": 240 },
-        { "type": "ken-burns-photo", "asset": "../../photos/judy/halifax-pier21-immigrant-woman-baby-1948.jpg", "startSeconds": 240, "endSeconds": 260, "panFrom": { "x": 0.5, "y": 0.4, "zoom": 1.0 }, "panTo": { "x": 0.5, "y": 0.55, "zoom": 1.3 } },
-        { "type": "then-now-slider", "leftSrc": "../then-now/assets/halifax-pier21-1948.jpg", "rightSrc": "../then-now/assets/mile-end-2018.jpg", "startSeconds": 260, "endSeconds": 275 },
-        { "type": "remotion-moment", "asset": "../assets/moments/two-suitcases.mp4", "startSeconds": 275, "endSeconds": 290 },
-        { "type": "end-credits", "asset": "./end-credits.mp4", "startSeconds": 290, "endSeconds": 300 }
+        { "type": "title", "asset": "./chapter-cards/ch4-after.mp4", "startSeconds": 220, "endSeconds": 232 },
+        { "type": "remotion-moment", "asset": "./moments-new/liberation-1945.mp4", "startSeconds": 232, "endSeconds": 250 },
+        { "type": "ken-burns-photo", "asset": "../../photos/judy/halifax-pier21-immigrant-woman-baby-1948.jpg", "startSeconds": 250, "endSeconds": 268, "panFrom": { "x": 0.5, "y": 0.4, "zoom": 1.0 }, "panTo": { "x": 0.5, "y": 0.55, "zoom": 1.3 } },
+        { "type": "then-now-slider", "leftSrc": "../then-now/assets/halifax-pier21-1948.jpg", "rightSrc": "../then-now/assets/mile-end-2018.jpg", "startSeconds": 268, "endSeconds": 283 },
+        { "type": "veo-atmospheric", "asset": "./atmospheric/alternates/wheat-golden-hour-alt.mp4", "startSeconds": 283, "endSeconds": 290, "loop": true },
+        { "type": "remotion-moment", "asset": "../assets/moments/two-suitcases.mp4", "startSeconds": 290, "endSeconds": 300 },
+        { "type": "end-credits", "asset": "./end-credits.mp4", "startSeconds": 300, "endSeconds": 320 }
       ]
     }
   ]
