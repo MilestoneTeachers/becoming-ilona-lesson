@@ -1386,3 +1386,23 @@ body.slide-mode .slide-nav {
     font-weight: 400;
   }
 }
+
+/* ============================================================
+   Vocabulary card icons (Codex-generated, May 2026)
+   Each card now leads with a small abstract gold-line icon
+   that previews the term visually before the definition.
+   ============================================================ */
+.vocab-card {
+  position: relative;
+}
+.vocab-card__icon {
+  display: block;
+  width: 56px;
+  height: 56px;
+  margin: 0 0 10px;
+  object-fit: contain;
+  opacity: 0.94;
+}
+@media print {
+  .vocab-card__icon { width: 36pt; height: 36pt; margin: 0 0 6pt; }
+}
