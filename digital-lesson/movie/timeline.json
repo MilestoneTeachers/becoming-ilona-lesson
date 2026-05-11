@@ -4,36 +4,14 @@
     "src": "./narration/festival-cut.mp3",
     "captions": "./narration/festival-cut.vtt"
   },
-  "musicTracks": {
-    "piano-bed": {
-      "src": "./music/pixabay-documentary-piano.mp3",
-      "loop": true,
-      "volume": 0.35,
-      "duckOnNarration": true,
-      "duckLevel": 0.12
-    },
-    "kodaly-cue": {
-      "src": "./music/kodaly-galantai-andante.mp3",
-      "loop": false,
-      "volume": 0.4,
-      "duckOnNarration": true,
-      "duckLevel": 0.18
-    },
-    "klezmer-cue": {
-      "src": "./music/crowander-klezmer.mp3",
-      "loop": false,
-      "volume": 0.3,
-      "duckOnNarration": true,
-      "duckLevel": 0.14
-    }
-  },
+  "musicTracks": {},
   "chapters": [
     {
       "id": "ch1-three-names",
       "title": "CHAPTER 1 — THREE NAMES",
       "startSeconds": 0,
       "endSeconds": 30,
-      "musicCue": "piano-bed",
+      "musicCue": null,
       "pauseAfter": {
         "prompt": "What do you notice about these three names?",
         "framingNote": "Take 30 seconds. Talk to a partner if you want. Then press Continue."
@@ -48,7 +26,7 @@
       "title": "CHAPTER 2 — BEFORE",
       "startSeconds": 30,
       "endSeconds": 105,
-      "musicCue": "kodaly-cue",
+      "musicCue": null,
       "pauseAfter": {
         "prompt": "What made Judy's family decide she had to hide?",
         "framingNote": "Talk to your neighbour for one minute. Then press Continue."
@@ -65,7 +43,7 @@
       "title": "CHAPTER 3 — DURING",
       "startSeconds": 105,
       "endSeconds": 210,
-      "musicCue": "piano-bed",
+      "musicCue": null,
       "pauseAfter": {
         "prompt": "What part of your own life would be hardest to set aside for a year?",
         "framingNote": "Think about your name, your language, your routines. Not about being Judy — about being you. Write or sketch one thing. Then press Continue."
@@ -84,7 +62,7 @@
       "title": "CHAPTER 4 — AFTER",
       "startSeconds": 210,
       "endSeconds": 300,
-      "musicCue": "piano-bed",
+      "musicCue": null,
       "beats": [
         { "type": "title", "asset": "./chapter-cards/ch4-after.mp4", "startSeconds": 210, "endSeconds": 222 },
         { "type": "remotion-moment", "asset": "./moments-new/liberation-1945.mp4", "startSeconds": 222, "endSeconds": 240 },

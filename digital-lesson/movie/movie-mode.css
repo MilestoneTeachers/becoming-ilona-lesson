@@ -281,3 +281,17 @@
   .movie-mode-stage__beat-layer img { transition: none; }
   .movie-mode-cta:hover, .movie-mode-cta:focus { transform: none; }
 }
+
+/* Honor reduced-motion preference for projection accessibility. */
+@media (prefers-reduced-motion: reduce) {
+  .movie-mode-stage__beat-layer .ken-burns,
+  .movie-mode-stage__beat-layer video,
+  .movie-mode-stage__beat-layer img {
+    transition: none !important;
+    animation: none !important;
+  }
+  .movie-mode-stage__beat-layer .ken-burns {
+    /* Lock at midpoint zoom; disables pan/zoom motion. */
+    transform: scale(1.15) !important;
+  }
+}
