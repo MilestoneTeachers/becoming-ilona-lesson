@@ -1,0 +1,11 @@
+{
+  "source": "OpenRouter google/veo-3.1-fast",
+  "model": "google/veo-3.1-fast",
+  "license": "Generated content — Google Veo terms apply; commercial + educational use permitted",
+  "attribution_string": "Atmospheric footage generated via Google Veo 3.1 Fast",
+  "url": "https://openrouter.ai/google/veo-3.1-fast",
+  "generated_at": "2026-05-11",
+  "cost_usd": 0.9504,
+  "note": "Alternate take of wheat-golden-hour-alt from second batch. Same prompt as primary, different generated take. Available for swap-in if primary doesn't land in QA.",
+  "primary_clip": "wheat-golden-hour.mp4"
+}

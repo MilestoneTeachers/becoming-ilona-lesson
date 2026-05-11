@@ -140,7 +140,7 @@ function _buildStageDOM() {
 }
 
 async function _setupAudio(state, timeline) {
-  const narrAudio = new Audio(timeline.narration.src);
+  const narrAudio = new Audio(state.resolveAsset(timeline.narration.src));
   narrAudio.preload = "auto";
   state.narrationAudio = narrAudio;
 
@@ -148,14 +148,21 @@ async function _setupAudio(state, timeline) {
   state.audioCtx = new AudioCtx();
   state.musicTracks = {};
   for (const [id, track] of Object.entries(timeline.musicTracks || {})) {
-    const audio = new Audio(track.src);
+    const audio = new Audio(state.resolveAsset(track.src));
     audio.preload = "auto";
     audio.loop = !!track.loop;
-    const src = state.audioCtx.createMediaElementSource(audio);
-    const gain = state.audioCtx.createGain();
-    gain.gain.value = 0; // Start silent; chapter activator ramps up
-    src.connect(gain).connect(state.audioCtx.destination);
-    state.musicTracks[id] = { audio, gain, config: track };
+    audio.addEventListener("error", () => {
+      console.warn(`[movie-mode] music track ${id} failed to load — playing silent for this cue`);
+    });
+    try {
+      const src = state.audioCtx.createMediaElementSource(audio);
+      const gain = state.audioCtx.createGain();
+      gain.gain.value = 0;
+      src.connect(gain).connect(state.audioCtx.destination);
+      state.musicTracks[id] = { audio, gain, config: track };
+    } catch (e) {
+      console.warn(`[movie-mode] failed to wire music track ${id}:`, e);
+    }
   }
 }
 
@@ -199,6 +206,7 @@ function _renderBeat(state, beat) {
     setTimeout(() => c.remove(), 1000);
   });
 
+  const resolveAsset = state.resolveAsset;
   let el;
   switch (beat.type) {
     case "title":
@@ -206,16 +214,18 @@ function _renderBeat(state, beat) {
     case "veo-atmospheric":
     case "end-credits":
       el = document.createElement("video");
-      el.src = beat.asset;
+      el.src = resolveAsset(beat.asset);
       el.autoplay = true;
       el.muted = true;
       el.playsInline = true;
       el.loop = !!beat.loop || beat.type === "veo-atmospheric";
+      el.addEventListener("error", () => console.warn(`[movie-mode] video failed: ${beat.asset}`));
       break;
     case "ken-burns-photo":
       el = document.createElement("img");
-      el.src = beat.asset;
+      el.src = resolveAsset(beat.asset);
       el.className = "ken-burns";
+      el.addEventListener("error", () => console.warn(`[movie-mode] photo failed: ${beat.asset}`));
       break;
     case "then-now-slider": {
       el = document.createElement("div");
@@ -223,10 +233,10 @@ function _renderBeat(state, beat) {
       el.style.inset = "0";
       el.style.overflow = "hidden";
       const leftImg = document.createElement("img");
-      leftImg.src = beat.leftSrc;
+      leftImg.src = resolveAsset(beat.leftSrc);
       leftImg.style.cssText = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;";
       const rightImg = document.createElement("img");
-      rightImg.src = beat.rightSrc;
+      rightImg.src = resolveAsset(beat.rightSrc);
       rightImg.style.cssText = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 0 0 0%);";
       rightImg.dataset.thenNowRight = "true";
       el.appendChild(leftImg);
@@ -429,17 +439,27 @@ export const MovieMode = {
   async open({ timelineSrc = "./movie/timeline.json" } = {}) {
     if (_stageEl) return;
 
+    // Resolve all asset paths against the timeline.json directory, not the
+    // host document. Critical: timeline.json uses "./narration/foo.mp3" which
+    // means relative-to-timeline, not relative-to-/digital-lesson/.
+    const timelineUrl = new URL(timelineSrc, document.baseURI);
+    const resolveAsset = (s) => new URL(s, timelineUrl).href;
+
     const timelineRaw = await _loadJSON(timelineSrc);
     const timeline = parseTimeline(timelineRaw);
 
     const stage = _buildStageDOM();
     document.body.appendChild(stage);
     _stageEl = stage;
+    const _prevBodyOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     const state = {
       stage,
       timeline,
+      timelineUrl,
+      resolveAsset,
+      prevBodyOverflow: _prevBodyOverflow,
       beatLayer: _q(stage, "[data-beat-layer]"),
       captionText: _q(stage, "[data-caption-text]"),
       pausePanel: _q(stage, "[data-pause-panel]"),
@@ -458,11 +478,9 @@ export const MovieMode = {
 
     await _setupAudio(state, timeline);
 
-    // Resolve captions src relative to the timeline src dir.
-    const timelineUrl = new URL(timelineSrc, document.baseURI);
-    const captionsUrl = new URL(timeline.narration.captions, timelineUrl);
+    // Captions — resolved via the same helper.
     try {
-      const vttRes = await fetch(captionsUrl.href);
+      const vttRes = await fetch(resolveAsset(timeline.narration.captions));
       if (vttRes.ok) {
         const vttText = await vttRes.text();
         state.captions = _parseVTT(vttText);
@@ -476,26 +494,60 @@ export const MovieMode = {
     state.keyHandler = (ev) => _onKey(state, ev);
     document.addEventListener("keydown", state.keyHandler);
 
-    await new Promise((resolve) => {
-      if (state.narrationAudio.readyState >= 3) return resolve();
-      state.narrationAudio.addEventListener("canplay", resolve, { once: true });
-    });
+    // Race the narration buffer against a 15-second timeout. If buffering
+    // hangs, show a friendly error instead of an indefinite loading screen.
+    const audio = state.narrationAudio;
+    try {
+      await new Promise((resolve, reject) => {
+        if (audio.readyState >= 3) return resolve();
+        const onCanPlay = () => { cleanup(); resolve(); };
+        const onError = () => { cleanup(); reject(new Error(`narration failed to load: ${audio.error?.message || "unknown"}`)); };
+        const timeout = setTimeout(() => { cleanup(); reject(new Error("narration buffer timeout after 15s")); }, 15000);
+        function cleanup() {
+          audio.removeEventListener("canplay", onCanPlay);
+          audio.removeEventListener("error", onError);
+          clearTimeout(timeout);
+        }
+        audio.addEventListener("canplay", onCanPlay, { once: true });
+        audio.addEventListener("error", onError, { once: true });
+      });
+    } catch (e) {
+      console.error("[movie-mode]", e);
+      state.loading.textContent = "Could not load the film. Refresh the page or watch the print PDF.";
+      state.loading.style.color = "#E8B341";
+      return;
+    }
+
     state.loading.setAttribute("hidden", "");
 
     if (state.audioCtx.state === "suspended") await state.audioCtx.resume();
 
-    await state.narrationAudio.play();
+    try {
+      await state.narrationAudio.play();
+    } catch (e) {
+      console.error("[movie-mode] narration play() rejected:", e);
+      state.loading.removeAttribute("hidden");
+      state.loading.textContent = "Click anywhere to start the film.";
+      // Recover by waiting for a user gesture inside the stage.
+      stage.addEventListener("click", () => {
+        state.narrationAudio.play().catch(() => {});
+        state.loading.setAttribute("hidden", "");
+      }, { once: true });
+    }
     requestAnimationFrame(() => _tick(state));
   },
 
   close() {
     if (!_stageEl || !_state) return;
     _state.closed = true;
-    _state.narrationAudio.pause();
-    for (const t of Object.values(_state.musicTracks || {})) t.audio.pause();
+    try { _state.narrationAudio.pause(); } catch {}
+    for (const t of Object.values(_state.musicTracks || {})) {
+      try { t.audio.pause(); } catch {}
+    }
+    try { _state.audioCtx?.close(); } catch {}
     document.removeEventListener("keydown", _state.keyHandler);
     _stageEl.remove();
-    document.body.style.overflow = "";
+    document.body.style.overflow = _state.prevBodyOverflow ?? "";
     _stageEl = null;
     _state = null;
   },

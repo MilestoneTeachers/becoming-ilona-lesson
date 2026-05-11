@@ -1,5 +1,5 @@
 {
-  "totalDurationSeconds": 780,
+  "totalDurationSeconds": 300,
   "narration": {
     "src": "./narration/festival-cut.mp3",
     "captions": "./narration/festival-cut.vtt"
@@ -32,68 +32,66 @@
       "id": "ch1-three-names",
       "title": "CHAPTER 1 — THREE NAMES",
       "startSeconds": 0,
-      "endSeconds": 90,
+      "endSeconds": 30,
       "musicCue": "piano-bed",
       "pauseAfter": {
         "prompt": "What do you notice about these three names?",
         "framingNote": "Take 30 seconds. Talk to a partner if you want. Then press Continue."
       },
       "beats": [
-        { "type": "title", "asset": "./chapter-cards/ch1-three-names.mp4", "startSeconds": 0, "endSeconds": 35 },
-        { "type": "remotion-moment", "asset": "../assets/moments/names-carried-forward.mp4", "startSeconds": 35, "endSeconds": 90 }
+        { "type": "title", "asset": "./chapter-cards/ch1-three-names.mp4", "startSeconds": 0, "endSeconds": 12 },
+        { "type": "remotion-moment", "asset": "../assets/moments/names-carried-forward.mp4", "startSeconds": 12, "endSeconds": 30 }
       ]
     },
     {
       "id": "ch2-before",
       "title": "CHAPTER 2 — BEFORE",
-      "startSeconds": 90,
-      "endSeconds": 270,
+      "startSeconds": 30,
+      "endSeconds": 105,
       "musicCue": "kodaly-cue",
       "pauseAfter": {
         "prompt": "What made Judy's family decide she had to hide?",
         "framingNote": "Talk to your neighbour for one minute. Then press Continue."
       },
       "beats": [
-        { "type": "title", "asset": "./chapter-cards/ch2-before.mp4", "startSeconds": 90, "endSeconds": 115 },
-        { "type": "ken-burns-photo", "asset": "../photos/judy/budapest-park-baby-carriages-1938-fortepan.jpg", "startSeconds": 115, "endSeconds": 175, "panFrom": { "x": 0.3, "y": 0.5, "zoom": 1.0 }, "panTo": { "x": 0.7, "y": 0.5, "zoom": 1.35 } },
-        { "type": "remotion-moment", "asset": "../assets/moments/names-carried-forward.mp4", "startSeconds": 175, "endSeconds": 230 },
-        { "type": "veo-atmospheric", "asset": "./atmospheric/candle-windowsill.mp4", "startSeconds": 230, "endSeconds": 270, "loop": true }
+        { "type": "title", "asset": "./chapter-cards/ch2-before.mp4", "startSeconds": 30, "endSeconds": 42 },
+        { "type": "ken-burns-photo", "asset": "../../photos/judy/budapest-park-baby-carriages-1938-fortepan.jpg", "startSeconds": 42, "endSeconds": 67, "panFrom": { "x": 0.3, "y": 0.5, "zoom": 1.0 }, "panTo": { "x": 0.7, "y": 0.5, "zoom": 1.35 } },
+        { "type": "remotion-moment", "asset": "./moments-new/march-1944-empty-room.mp4", "startSeconds": 67, "endSeconds": 90 },
+        { "type": "veo-atmospheric", "asset": "./atmospheric/candle-windowsill.mp4", "startSeconds": 90, "endSeconds": 105, "loop": true }
       ]
     },
     {
       "id": "ch3-during",
       "title": "CHAPTER 3 — DURING",
-      "startSeconds": 270,
-      "endSeconds": 570,
+      "startSeconds": 105,
+      "endSeconds": 210,
       "musicCue": "piano-bed",
       "pauseAfter": {
         "prompt": "What part of your own life would be hardest to set aside for a year?",
         "framingNote": "Think about your name, your language, your routines. Not about being Judy — about being you. Write or sketch one thing. Then press Continue."
       },
       "beats": [
-        { "type": "title", "asset": "./chapter-cards/ch3-during.mp4", "startSeconds": 270, "endSeconds": 295 },
-        { "type": "then-now-slider", "leftSrc": "../then-now/assets/stefania-1943.jpg", "rightSrc": "../then-now/assets/stefania-2018.jpg", "startSeconds": 295, "endSeconds": 335 },
-        { "type": "remotion-moment", "asset": "../assets/moments/cover-story-checklist.mp4", "startSeconds": 335, "endSeconds": 395 },
-        { "type": "remotion-moment", "asset": "../assets/moments/hidden-child-daily-clock.mp4", "startSeconds": 395, "endSeconds": 445 },
-        { "type": "then-now-slider", "leftSrc": "../then-now/assets/rural-hungary-1944.jpg", "rightSrc": "../then-now/assets/pincehely-2025.jpg", "startSeconds": 445, "endSeconds": 480 },
-        { "type": "remotion-moment", "asset": "../assets/moments/two-names-toggle.mp4", "startSeconds": 480, "endSeconds": 530 },
-        { "type": "veo-atmospheric", "asset": "./atmospheric/snow-cobblestones.mp4", "startSeconds": 530, "endSeconds": 570, "loop": true }
+        { "type": "title", "asset": "./chapter-cards/ch3-during.mp4", "startSeconds": 105, "endSeconds": 117 },
+        { "type": "then-now-slider", "leftSrc": "../then-now/assets/stefania-1943.jpg", "rightSrc": "../then-now/assets/stefania-2018.jpg", "startSeconds": 117, "endSeconds": 140 },
+        { "type": "remotion-moment", "asset": "../assets/moments/cover-story-checklist.mp4", "startSeconds": 140, "endSeconds": 165 },
+        { "type": "remotion-moment", "asset": "../assets/moments/hidden-child-daily-clock.mp4", "startSeconds": 165, "endSeconds": 185 },
+        { "type": "remotion-moment", "asset": "../assets/moments/two-names-toggle.mp4", "startSeconds": 185, "endSeconds": 200 },
+        { "type": "veo-atmospheric", "asset": "./atmospheric/snow-cobblestones.mp4", "startSeconds": 200, "endSeconds": 210, "loop": true }
       ]
     },
     {
       "id": "ch4-after",
       "title": "CHAPTER 4 — AFTER",
-      "startSeconds": 570,
-      "endSeconds": 780,
+      "startSeconds": 210,
+      "endSeconds": 300,
       "musicCue": "piano-bed",
       "beats": [
-        { "type": "title", "asset": "./chapter-cards/ch4-after.mp4", "startSeconds": 570, "endSeconds": 595 },
-        { "type": "remotion-moment", "asset": "./moments-new/liberation-1945.mp4", "startSeconds": 595, "endSeconds": 625 },
-        { "type": "ken-burns-photo", "asset": "../photos/judy/halifax-pier21-immigrant-woman-baby-1948.jpg", "startSeconds": 625, "endSeconds": 670, "panFrom": { "x": 0.5, "y": 0.4, "zoom": 1.0 }, "panTo": { "x": 0.5, "y": 0.55, "zoom": 1.3 } },
-        { "type": "then-now-slider", "leftSrc": "../then-now/assets/halifax-pier21-1948.jpg", "rightSrc": "../then-now/assets/mile-end-2018.jpg", "startSeconds": 670, "endSeconds": 705 },
-        { "type": "remotion-moment", "asset": "../assets/moments/two-suitcases.mp4", "startSeconds": 705, "endSeconds": 745 },
-        { "type": "remotion-moment", "asset": "../assets/moments/names-carried-forward.mp4", "startSeconds": 745, "endSeconds": 760 },
-        { "type": "end-credits", "asset": "./end-credits.mp4", "startSeconds": 760, "endSeconds": 780 }
+        { "type": "title", "asset": "./chapter-cards/ch4-after.mp4", "startSeconds": 210, "endSeconds": 222 },
+        { "type": "remotion-moment", "asset": "./moments-new/liberation-1945.mp4", "startSeconds": 222, "endSeconds": 240 },
+        { "type": "ken-burns-photo", "asset": "../../photos/judy/halifax-pier21-immigrant-woman-baby-1948.jpg", "startSeconds": 240, "endSeconds": 260, "panFrom": { "x": 0.5, "y": 0.4, "zoom": 1.0 }, "panTo": { "x": 0.5, "y": 0.55, "zoom": 1.3 } },
+        { "type": "then-now-slider", "leftSrc": "../then-now/assets/halifax-pier21-1948.jpg", "rightSrc": "../then-now/assets/mile-end-2018.jpg", "startSeconds": 260, "endSeconds": 275 },
+        { "type": "remotion-moment", "asset": "../assets/moments/two-suitcases.mp4", "startSeconds": 275, "endSeconds": 290 },
+        { "type": "end-credits", "asset": "./end-credits.mp4", "startSeconds": 290, "endSeconds": 300 }
       ]
     }
   ]
