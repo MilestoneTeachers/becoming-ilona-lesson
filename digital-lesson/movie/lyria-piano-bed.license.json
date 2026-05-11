@@ -1,0 +1,12 @@
+{
+  "source": "OpenRouter google/lyria-3-pro-preview",
+  "model": "google/lyria-3-pro-preview",
+  "license": "Generated content — Google Lyria 3 terms apply; commercial + educational use permitted",
+  "attribution_string": "Music generated via Google Lyria 3 Pro (preview)",
+  "url": "https://openrouter.ai/google/lyria-3-pro-preview",
+  "prompt": "Slow, contemplative solo piano in a minor key. Sparse single notes with long sustain and resonance. No melody — atmospheric documentary film score. Sustained chords. No drums. No percussion. No vocals. 30 seconds. Reflective, restrained, deeply quiet. Suitable for a film about memory and survival. Modern classical and ambient.",
+  "generated_at": "2026-05-11T13:18:53.631Z",
+  "cost_usd": 0,
+  "segment_description": "[[A0]]\n[[B1]]mosic: 4.5\nbpm: 60.0\nduration_secs: 32.0\ngood_crop: 1.0\n[[A0]]\n[0.0:] A contemplative and deeply quiet Modern Classical intro defined by the solitary resonance of a solo piano. The segment is anchored by isolated, sparse notes in the lower-middle register, played with a gentle, hesitant touch to highlight the instrument's natural warmth and timbre. The rhythm is non-metered and fluid, characterized by long, slow decays that emphasize the silence between the hits. The instrumentation is strictly a solo acoustic piano with a rich, woody resonance and a deep, sustaining pedal effect that allows the harmonies to bleed into one another. There are no drums, percussion, or vocals present in the soundscape. The melodic structure is minimal, avoiding a fixed tune in favor of a wandering, exploratory sequence of intervals that creates a sense of lingering thought. The interaction between the notes and the silence is the primary focus, establishing an atmosphere of stark vulnerability and reflection, reminiscent of an opening scene in a documentary about personal history.\n[[B1]]\n[16.0:] A restrained and haunting Modern Classical movement defined by shifting harmonic textures and ",
+  "note": "Original AI-generated music. Free preview tier as of May 2026."
+}

@@ -4,14 +4,29 @@
     "src": "./narration/festival-cut.mp3",
     "captions": "./narration/festival-cut.vtt"
   },
-  "musicTracks": {},
+  "musicTracks": {
+    "piano-bed": {
+      "src": "./music/lyria-piano-bed.mp3",
+      "loop": true,
+      "volume": 0.32,
+      "duckOnNarration": true,
+      "duckLevel": 0.11
+    },
+    "cello-cue": {
+      "src": "./music/lyria-cello-cue.mp3",
+      "loop": false,
+      "volume": 0.38,
+      "duckOnNarration": true,
+      "duckLevel": 0.14
+    }
+  },
   "chapters": [
     {
       "id": "ch1-three-names",
       "title": "CHAPTER 1 — THREE NAMES",
       "startSeconds": 0,
       "endSeconds": 30,
-      "musicCue": null,
+      "musicCue": "piano-bed",
       "pauseAfter": {
         "prompt": "What do you notice about these three names?",
         "framingNote": "Take 30 seconds. Talk to a partner if you want. Then press Continue."
@@ -26,7 +41,7 @@
       "title": "CHAPTER 2 — BEFORE",
       "startSeconds": 30,
       "endSeconds": 110,
-      "musicCue": null,
+      "musicCue": "piano-bed",
       "pauseAfter": {
         "prompt": "What made Judy's family decide she had to hide?",
         "framingNote": "Talk to your neighbour for one minute. Then press Continue."
@@ -45,7 +60,7 @@
       "title": "CHAPTER 3 — DURING",
       "startSeconds": 110,
       "endSeconds": 220,
-      "musicCue": null,
+      "musicCue": "cello-cue",
       "pauseAfter": {
         "prompt": "What part of your own life would be hardest to set aside for a year?",
         "framingNote": "Think about your name, your language, your routines. Not about being Judy — about being you. Write or sketch one thing. Then press Continue."
@@ -65,7 +80,7 @@
       "title": "CHAPTER 4 — AFTER",
       "startSeconds": 220,
       "endSeconds": 330,
-      "musicCue": null,
+      "musicCue": "piano-bed",
       "beats": [
         { "type": "title", "asset": "./chapter-cards/ch4-after.mp4", "startSeconds": 220, "endSeconds": 232 },
         { "type": "remotion-moment", "asset": "./moments-new/liberation-1945.mp4", "startSeconds": 232, "endSeconds": 250 },

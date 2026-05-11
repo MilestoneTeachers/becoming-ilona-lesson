@@ -1,0 +1,12 @@
+{
+  "source": "OpenRouter google/lyria-3-pro-preview",
+  "model": "google/lyria-3-pro-preview",
+  "license": "Generated content — Google Lyria 3 terms apply; commercial + educational use permitted",
+  "attribution_string": "Music generated via Google Lyria 3 Pro (preview)",
+  "url": "https://openrouter.ai/google/lyria-3-pro-preview",
+  "prompt": "Solo cello with sparse, low-resonating strings. Sustained long notes in a minor key, ambient and reflective. No melody. Slow bowing, breath between phrases. Documentary film score for memory and survival. No drums. No vocals. Modern classical, sustained chords, room sound. 30 seconds.",
+  "generated_at": "2026-05-11T13:19:25.368Z",
+  "cost_usd": 0,
+  "segment_description": "[[A0]]\n[[A1]]mosic: 4.5\nbpm: 60.0\nduration_secs: 32.0\ngood_crop: 1.0\n[[A0]]\n[0.0:] An ambient, reflective modern classical introduction defined by the solitary presence of a solo cello. The segment is anchored by long, bowed notes on the instrument's lowest C-string, producing a rich, woody vibration that resonates deeply. There are no drums or vocals in this segment; the rhythm is fluid and rubato, governed only by the natural pulse and breath of a human performer. The instrumentation is incredibly minimal, consisting only of the cello and the audible 'room sound,' which captures the dry friction of hairs against string, typical of a high-end documentary score. No sharp melodies are present; instead, the cello performs a series of sustained, harmonically shifting intervals that evoke a minor-key melancholy. These low tones vibrate against a backdrop of incredibly sparse, high-pitched auxiliary strings that hum quietly in the background like ghosts. The interaction between the dry, percussive bow hair and the resonant wooden body creates an intimate, tactile atmosphere that feels like a quiet confession in an ancient library.\n[[A1]]\n[16.0:] An ambient, reflective modern classical s",
+  "note": "Original AI-generated music. Free preview tier as of May 2026."
+}
